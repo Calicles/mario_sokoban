@@ -1,0 +1,1842 @@
+==6426== Memcheck, a memory error detector
+==6426== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==6426== Using Valgrind-3.13.0 and LibVEX; rerun with -h for copyright info
+==6426== Command: ./test
+==6426== Parent PID: 6406
+==6426== 
+--6426-- 
+--6426-- Valgrind options:
+--6426--    --log-file=log/debug.log
+--6426--    -v
+--6426--    --tool=memcheck
+--6426--    --leak-check=full
+--6426--    --leak-resolution=high
+--6426--    --show-reachable=yes
+--6426-- Contents of /proc/version:
+--6426--   Linux version 4.15.0-66-generic (buildd@lgw01-amd64-044) (gcc version 7.4.0 (Ubuntu 7.4.0-1ubuntu1~18.04.1)) #75-Ubuntu SMP Tue Oct 1 05:24:09 UTC 2019
+--6426-- 
+--6426-- Arch and hwcaps: AMD64, LittleEndian, amd64-cx16-lzcnt-rdtscp-sse3-avx-avx2-bmi
+--6426-- Page sizes: currently 4096, max supported 4096
+--6426-- Valgrind library directory: /usr/lib/valgrind
+--6426-- Reading syms from /home/antoine/dev/c/test/SDL/sokoban/build/test
+--6426-- Reading syms from /lib/x86_64-linux-gnu/ld-2.27.so
+--6426--   Considering /lib/x86_64-linux-gnu/ld-2.27.so ..
+--6426--   .. CRC mismatch (computed 1b7c895e wanted 2943108a)
+--6426--   Considering /usr/lib/debug/lib/x86_64-linux-gnu/ld-2.27.so ..
+--6426--   .. CRC is valid
+--6426-- Reading syms from /usr/lib/valgrind/memcheck-amd64-linux
+--6426--   Considering /usr/lib/valgrind/memcheck-amd64-linux ..
+--6426--   .. CRC mismatch (computed c25f395c wanted 0a9602a8)
+--6426--    object doesn't have a symbol table
+--6426--    object doesn't have a dynamic symbol table
+--6426-- Scheduler: using generic scheduler lock implementation.
+--6426-- Reading suppressions file: /usr/lib/valgrind/default.supp
+==6426== embedded gdbserver: reading from /tmp/vgdb-pipe-from-vgdb-to-6426-by-antoine-on-???
+==6426== embedded gdbserver: writing to   /tmp/vgdb-pipe-to-vgdb-from-6426-by-antoine-on-???
+==6426== embedded gdbserver: shared mem   /tmp/vgdb-pipe-shared-mem-vgdb-6426-by-antoine-on-???
+==6426== 
+==6426== TO CONTROL THIS PROCESS USING vgdb (which you probably
+==6426== don't want to do, unless you know exactly what you're doing,
+==6426== or are doing some strange experiment):
+==6426==   /usr/lib/valgrind/../../bin/vgdb --pid=6426 ...command...
+==6426== 
+==6426== TO DEBUG THIS PROCESS USING GDB: start GDB like this
+==6426==   /path/to/gdb ./test
+==6426== and then give GDB the following command
+==6426==   target remote | /usr/lib/valgrind/../../bin/vgdb --pid=6426
+==6426== --pid is optional if only one valgrind process is running
+==6426== 
+--6426-- REDIR: 0x401f2f0 (ld-linux-x86-64.so.2:strlen) redirected to 0x58060901 (???)
+--6426-- REDIR: 0x401f0d0 (ld-linux-x86-64.so.2:index) redirected to 0x5806091b (???)
+--6426-- Reading syms from /usr/lib/valgrind/vgpreload_core-amd64-linux.so
+--6426--   Considering /usr/lib/valgrind/vgpreload_core-amd64-linux.so ..
+--6426--   .. CRC mismatch (computed 4b63d83e wanted 670599e6)
+--6426--    object doesn't have a symbol table
+--6426-- Reading syms from /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so
+--6426--   Considering /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so ..
+--6426--   .. CRC mismatch (computed a4b37bee wanted 8ad4dc94)
+--6426--    object doesn't have a symbol table
+==6426== WARNING: new redirection conflicts with existing -- ignoring it
+--6426--     old: 0x0401f2f0 (strlen              ) R-> (0000.0) 0x58060901 ???
+--6426--     new: 0x0401f2f0 (strlen              ) R-> (2007.0) 0x04c32db0 strlen
+--6426-- REDIR: 0x401d360 (ld-linux-x86-64.so.2:strcmp) redirected to 0x4c33ee0 (strcmp)
+--6426-- REDIR: 0x401f830 (ld-linux-x86-64.so.2:mempcpy) redirected to 0x4c374f0 (mempcpy)
+--6426-- Reading syms from /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4
+--6426--    object doesn't have a symbol table
+--6426-- Reading syms from /usr/lib/x86_64-linux-gnu/libSDL_image-1.2.so.0.8.4
+--6426--    object doesn't have a symbol table
+--6426-- Reading syms from /lib/x86_64-linux-gnu/libc-2.27.so
+--6426--   Considering /lib/x86_64-linux-gnu/libc-2.27.so ..
+--6426--   .. CRC mismatch (computed b1c74187 wanted 042cc048)
+--6426--   Considering /usr/lib/debug/lib/x86_64-linux-gnu/libc-2.27.so ..
+--6426--   .. CRC is valid
+--6426-- Reading syms from /usr/lib/x86_64-linux-gnu/libasound.so.2.0.0
+--6426--    object doesn't have a symbol table
+--6426-- Reading syms from /lib/x86_64-linux-gnu/libm-2.27.so
+--6426--   Considering /lib/x86_64-linux-gnu/libm-2.27.so ..
+--6426--   .. CRC mismatch (computed 7feae033 wanted b29b2508)
+--6426--   Considering /usr/lib/debug/lib/x86_64-linux-gnu/libm-2.27.so ..
+--6426--   .. CRC is valid
+--6426-- Reading syms from /lib/x86_64-linux-gnu/libdl-2.27.so
+--6426--   Considering /lib/x86_64-linux-gnu/libdl-2.27.so ..
+--6426--   .. CRC mismatch (computed bd82fa02 wanted d1fdccc9)
+--6426--   Considering /usr/lib/debug/lib/x86_64-linux-gnu/libdl-2.27.so ..
+--6426--   .. CRC is valid
+--6426-- Reading syms from /usr/lib/x86_64-linux-gnu/libpulse-simple.so.0.1.1
+--6426--    object doesn't have a symbol table
+--6426-- Reading syms from /usr/lib/x86_64-linux-gnu/libpulse.so.0.20.2
+--6426--    object doesn't have a symbol table
+--6426-- Reading syms from /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0
+--6426--    object doesn't have a symbol table
+--6426-- Reading syms from /usr/lib/x86_64-linux-gnu/libXext.so.6.4.0
+--6426--   Considering /usr/lib/x86_64-linux-gnu/libXext.so.6.4.0 ..
+--6426--   .. CRC mismatch (computed b483887a wanted 38c83e44)
+--6426--    object doesn't have a symbol table
+--6426-- Reading syms from /usr/lib/x86_64-linux-gnu/libcaca.so.0.99.19
+--6426--    object doesn't have a symbol table
+--6426-- Reading syms from /lib/x86_64-linux-gnu/libpthread-2.27.so
+--6426--   Considering /usr/lib/debug/.build-id/28/c6aade70b2d40d1f0f3d0a1a0cad1ab816448f.debug ..
+--6426--   .. build-id is valid
+--6426-- Reading syms from /usr/lib/x86_64-linux-gnu/libpng16.so.16.34.0
+--6426--    object doesn't have a symbol table
+--6426-- Reading syms from /usr/lib/x86_64-linux-gnu/libjpeg.so.8.1.2
+--6426--    object doesn't have a symbol table
+--6426-- Reading syms from /usr/lib/x86_64-linux-gnu/libtiff.so.5.3.0
+--6426--    object doesn't have a symbol table
+--6426-- Reading syms from /usr/lib/x86_64-linux-gnu/libwebp.so.6.0.2
+--6426--    object doesn't have a symbol table
+--6426-- Reading syms from /lib/x86_64-linux-gnu/librt-2.27.so
+--6426--   Considering /lib/x86_64-linux-gnu/librt-2.27.so ..
+--6426--   .. CRC mismatch (computed 16979484 wanted f9e041e3)
+--6426--   Considering /usr/lib/debug/lib/x86_64-linux-gnu/librt-2.27.so ..
+--6426--   .. CRC is valid
+--6426-- Reading syms from /usr/lib/x86_64-linux-gnu/pulseaudio/libpulsecommon-11.1.so
+--6426--    object doesn't have a symbol table
+--6426-- Reading syms from /lib/x86_64-linux-gnu/libdbus-1.so.3.19.4
+--6426--    object doesn't have a symbol table
+--6426-- Reading syms from /usr/lib/x86_64-linux-gnu/libxcb.so.1.1.0
+--6426--    object doesn't have a symbol table
+--6426-- Reading syms from /lib/x86_64-linux-gnu/libslang.so.2.3.1
+--6426--    object doesn't have a symbol table
+--6426-- Reading syms from /lib/x86_64-linux-gnu/libncursesw.so.5.9
+--6426--    object doesn't have a symbol table
+--6426-- Reading syms from /lib/x86_64-linux-gnu/libtinfo.so.5.9
+--6426--    object doesn't have a symbol table
+--6426-- Reading syms from /lib/x86_64-linux-gnu/libz.so.1.2.11
+--6426--    object doesn't have a symbol table
+--6426-- Reading syms from /lib/x86_64-linux-gnu/liblzma.so.5.2.2
+--6426--    object doesn't have a symbol table
+--6426-- Reading syms from /usr/lib/x86_64-linux-gnu/libjbig.so.0
+--6426--    object doesn't have a symbol table
+--6426-- Reading syms from /lib/x86_64-linux-gnu/libsystemd.so.0.21.0
+--6426--    object doesn't have a symbol table
+--6426-- Reading syms from /lib/x86_64-linux-gnu/libwrap.so.0.7.6
+--6426--    object doesn't have a symbol table
+--6426-- Reading syms from /usr/lib/x86_64-linux-gnu/libsndfile.so.1.0.28
+--6426--    object doesn't have a symbol table
+--6426-- Reading syms from /usr/lib/x86_64-linux-gnu/libasyncns.so.0.3.1
+--6426--    object doesn't have a symbol table
+--6426-- Reading syms from /usr/lib/x86_64-linux-gnu/libXau.so.6.0.0
+--6426--   Considering /usr/lib/x86_64-linux-gnu/libXau.so.6.0.0 ..
+--6426--   .. CRC mismatch (computed 256f5df8 wanted 5d40ac88)
+--6426--    object doesn't have a symbol table
+--6426-- Reading syms from /usr/lib/x86_64-linux-gnu/libXdmcp.so.6.0.0
+--6426--    object doesn't have a symbol table
+--6426-- Reading syms from /usr/lib/x86_64-linux-gnu/liblz4.so.1.7.1
+--6426--   Considering /usr/lib/x86_64-linux-gnu/liblz4.so.1.7.1 ..
+--6426--   .. CRC mismatch (computed 40fbd3a8 wanted 46df455d)
+--6426--    object doesn't have a symbol table
+--6426-- Reading syms from /lib/x86_64-linux-gnu/libgcrypt.so.20.2.1
+--6426--    object doesn't have a symbol table
+--6426-- Reading syms from /lib/x86_64-linux-gnu/libnsl-2.27.so
+--6426--   Considering /lib/x86_64-linux-gnu/libnsl-2.27.so ..
+--6426--   .. CRC mismatch (computed 5dfb2e24 wanted a9b787f5)
+--6426--   Considering /usr/lib/debug/lib/x86_64-linux-gnu/libnsl-2.27.so ..
+--6426--   .. CRC is valid
+--6426-- Reading syms from /usr/lib/x86_64-linux-gnu/libFLAC.so.8.3.0
+--6426--    object doesn't have a symbol table
+--6426-- Reading syms from /usr/lib/x86_64-linux-gnu/libogg.so.0.8.2
+--6426--   Considering /usr/lib/x86_64-linux-gnu/libogg.so.0.8.2 ..
+--6426--   .. CRC mismatch (computed 79e45162 wanted f32912dd)
+--6426--    object doesn't have a symbol table
+--6426-- Reading syms from /usr/lib/x86_64-linux-gnu/libvorbis.so.0.4.8
+--6426--    object doesn't have a symbol table
+--6426-- Reading syms from /usr/lib/x86_64-linux-gnu/libvorbisenc.so.2.0.11
+--6426--    object doesn't have a symbol table
+--6426-- Reading syms from /lib/x86_64-linux-gnu/libresolv-2.27.so
+--6426--   Considering /lib/x86_64-linux-gnu/libresolv-2.27.so ..
+--6426--   .. CRC mismatch (computed 4f654d8d wanted bb34a537)
+--6426--   Considering /usr/lib/debug/lib/x86_64-linux-gnu/libresolv-2.27.so ..
+--6426--   .. CRC is valid
+--6426-- Reading syms from /lib/x86_64-linux-gnu/libbsd.so.0.8.7
+--6426--    object doesn't have a symbol table
+--6426-- Reading syms from /lib/x86_64-linux-gnu/libgpg-error.so.0.22.0
+--6426--    object doesn't have a symbol table
+--6426-- REDIR: 0x5390c70 (libc.so.6:memmove) redirected to 0x4a2a6e0 (_vgnU_ifunc_wrapper)
+--6426-- REDIR: 0x538fd40 (libc.so.6:strncpy) redirected to 0x4a2a6e0 (_vgnU_ifunc_wrapper)
+--6426-- REDIR: 0x5390f50 (libc.so.6:strcasecmp) redirected to 0x4a2a6e0 (_vgnU_ifunc_wrapper)
+--6426-- REDIR: 0x538f790 (libc.so.6:strcat) redirected to 0x4a2a6e0 (_vgnU_ifunc_wrapper)
+--6426-- REDIR: 0x538fd70 (libc.so.6:rindex) redirected to 0x4a2a6e0 (_vgnU_ifunc_wrapper)
+--6426-- REDIR: 0x53927c0 (libc.so.6:rawmemchr) redirected to 0x4a2a6e0 (_vgnU_ifunc_wrapper)
+--6426-- REDIR: 0x5390de0 (libc.so.6:mempcpy) redirected to 0x4a2a6e0 (_vgnU_ifunc_wrapper)
+--6426-- REDIR: 0x5390c10 (libc.so.6:bcmp) redirected to 0x4a2a6e0 (_vgnU_ifunc_wrapper)
+--6426-- REDIR: 0x538fd00 (libc.so.6:strncmp) redirected to 0x4a2a6e0 (_vgnU_ifunc_wrapper)
+--6426-- REDIR: 0x538f800 (libc.so.6:strcmp) redirected to 0x4a2a6e0 (_vgnU_ifunc_wrapper)
+--6426-- REDIR: 0x5390d40 (libc.so.6:memset) redirected to 0x4a2a6e0 (_vgnU_ifunc_wrapper)
+--6426-- REDIR: 0x53ae0f0 (libc.so.6:wcschr) redirected to 0x4a2a6e0 (_vgnU_ifunc_wrapper)
+--6426-- REDIR: 0x538fca0 (libc.so.6:strnlen) redirected to 0x4a2a6e0 (_vgnU_ifunc_wrapper)
+--6426-- REDIR: 0x538f870 (libc.so.6:strcspn) redirected to 0x4a2a6e0 (_vgnU_ifunc_wrapper)
+--6426-- REDIR: 0x5390fa0 (libc.so.6:strncasecmp) redirected to 0x4a2a6e0 (_vgnU_ifunc_wrapper)
+--6426-- REDIR: 0x538f840 (libc.so.6:strcpy) redirected to 0x4a2a6e0 (_vgnU_ifunc_wrapper)
+--6426-- REDIR: 0x53910e0 (libc.so.6:memcpy@@GLIBC_2.14) redirected to 0x4a2a6e0 (_vgnU_ifunc_wrapper)
+--6426-- REDIR: 0x538fda0 (libc.so.6:strpbrk) redirected to 0x4a2a6e0 (_vgnU_ifunc_wrapper)
+--6426-- REDIR: 0x538f7c0 (libc.so.6:index) redirected to 0x4a2a6e0 (_vgnU_ifunc_wrapper)
+--6426-- REDIR: 0x538fc70 (libc.so.6:strlen) redirected to 0x4a2a6e0 (_vgnU_ifunc_wrapper)
+--6426-- REDIR: 0x539a6c0 (libc.so.6:memrchr) redirected to 0x4a2a6e0 (_vgnU_ifunc_wrapper)
+--6426-- REDIR: 0x5390ff0 (libc.so.6:strcasecmp_l) redirected to 0x4a2a6e0 (_vgnU_ifunc_wrapper)
+--6426-- REDIR: 0x5390be0 (libc.so.6:memchr) redirected to 0x4a2a6e0 (_vgnU_ifunc_wrapper)
+--6426-- REDIR: 0x53aeeb0 (libc.so.6:wcslen) redirected to 0x4a2a6e0 (_vgnU_ifunc_wrapper)
+--6426-- REDIR: 0x5390050 (libc.so.6:strspn) redirected to 0x4a2a6e0 (_vgnU_ifunc_wrapper)
+--6426-- REDIR: 0x5390f20 (libc.so.6:stpncpy) redirected to 0x4a2a6e0 (_vgnU_ifunc_wrapper)
+--6426-- REDIR: 0x5390ef0 (libc.so.6:stpcpy) redirected to 0x4a2a6e0 (_vgnU_ifunc_wrapper)
+--6426-- REDIR: 0x53927f0 (libc.so.6:strchrnul) redirected to 0x4a2a6e0 (_vgnU_ifunc_wrapper)
+--6426-- REDIR: 0x5391040 (libc.so.6:strncasecmp_l) redirected to 0x4a2a6e0 (_vgnU_ifunc_wrapper)
+--6426-- REDIR: 0x54238a0 (libc.so.6:__memcpy_chk) redirected to 0x4a2a6e0 (_vgnU_ifunc_wrapper)
+--6426-- REDIR: 0x538fcd0 (libc.so.6:strncat) redirected to 0x4a2a6e0 (_vgnU_ifunc_wrapper)
+--6426-- REDIR: 0x5390b20 (libc.so.6:strstr) redirected to 0x4a2a6e0 (_vgnU_ifunc_wrapper)
+--6426-- REDIR: 0x54803c0 (libc.so.6:__strrchr_avx2) redirected to 0x4c32730 (rindex)
+--6426-- REDIR: 0x5480590 (libc.so.6:__strlen_avx2) redirected to 0x4c32cf0 (strlen)
+--6426-- REDIR: 0x5389070 (libc.so.6:malloc) redirected to 0x4c2faa0 (malloc)
+--6426-- REDIR: 0x5480ad0 (libc.so.6:__memcpy_avx_unaligned_erms) redirected to 0x4c366e0 (memmove)
+--6426-- REDIR: 0x545bd60 (libc.so.6:__strcmp_ssse3) redirected to 0x4c33da0 (strcmp)
+--6426-- REDIR: 0x5477510 (libc.so.6:__strncmp_sse42) redirected to 0x4c33570 (__strncmp_sse42)
+--6426-- REDIR: 0x538c030 (libc.so.6:calloc) redirected to 0x4c31a70 (calloc)
+--6426-- REDIR: 0x5389950 (libc.so.6:free) redirected to 0x4c30cd0 (free)
+--6426-- REDIR: 0x54801d0 (libc.so.6:__strchrnul_avx2) redirected to 0x4c37020 (strchrnul)
+--6426-- REDIR: 0x5423c70 (libc.so.6:__strcpy_chk) redirected to 0x4c37090 (__strcpy_chk)
+--6426-- REDIR: 0x5390590 (libc.so.6:__GI_strstr) redirected to 0x4c37760 (__strstr_sse2)
+--6426-- REDIR: 0x547cba0 (libc.so.6:__memcmp_avx2_movbe) redirected to 0x4c35e00 (bcmp)
+--6426-- REDIR: 0x5480f50 (libc.so.6:__memset_avx2_unaligned_erms) redirected to 0x4c365d0 (memset)
+--6426-- REDIR: 0x538ac30 (libc.so.6:realloc) redirected to 0x4c31cb0 (realloc)
+--6426-- REDIR: 0x546f100 (libc.so.6:__strncpy_ssse3) redirected to 0x4c32fb0 (strncpy)
+--6426-- REDIR: 0x546d950 (libc.so.6:__strcpy_ssse3) redirected to 0x4c32dd0 (strcpy)
+--6426-- REDIR: 0x547ffa0 (libc.so.6:__strchr_avx2) redirected to 0x4c32950 (index)
+--6426-- REDIR: 0x5480ab0 (libc.so.6:__mempcpy_avx_unaligned_erms) redirected to 0x4c37130 (mempcpy)
+--6426-- REDIR: 0x547c420 (libc.so.6:__memchr_avx2) redirected to 0x4c33f80 (memchr)
+--6426-- REDIR: 0x5480ac0 (libc.so.6:__memcpy_chk_avx_unaligned_erms) redirected to 0x4c375e0 (__memcpy_chk)
+--6426-- Reading syms from /usr/lib/x86_64-linux-gnu/libXcursor.so.1.0.2
+--6426--    object doesn't have a symbol table
+--6426-- Reading syms from /usr/lib/x86_64-linux-gnu/libXrender.so.1.3.0
+--6426--    object doesn't have a symbol table
+--6426-- Reading syms from /usr/lib/x86_64-linux-gnu/libXfixes.so.3.1.0
+--6426--    object doesn't have a symbol table
+--6426-- REDIR: 0x53a39e0 (libc.so.6:__strcat_ssse3) redirected to 0x4c32990 (strcat)
+--6426-- REDIR: 0x5471c80 (libc.so.6:__stpcpy_ssse3) redirected to 0x4c35f60 (stpcpy)
+==6426== 
+==6426== HEAP SUMMARY:
+==6426==     in use at exit: 48,944 bytes in 504 blocks
+==6426==   total heap usage: 2,741 allocs, 2,237 frees, 694,426 bytes allocated
+==6426== 
+==6426== Searching for pointers to 504 not-freed blocks
+==6426== Checked 2,526,232 bytes
+==6426== 
+==6426== 2 bytes in 1 blocks are still reachable in loss record 1 of 114
+==6426==    at 0x4C2FB0F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==6426==    by 0x538F9B9: strdup (strdup.c:42)
+==6426==    by 0x64347AF: _XlcCreateLC (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x64504DF: _XlcDefaultLoader (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643BBBD: _XOpenLC (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643BDFA: _XrmInitParseInfo (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x64239FF: ??? (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x642725D: XrmGetStringDatabase (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x64035F3: ??? (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x6403897: XGetDefault (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0xC1E7EC2: _XcursorGetDisplayInfo (in /usr/lib/x86_64-linux-gnu/libXcursor.so.1.0.2)
+==6426==    by 0xC1E7F28: XcursorSupportsARGB (in /usr/lib/x86_64-linux-gnu/libXcursor.so.1.0.2)
+==6426== 
+==6426== 2 bytes in 1 blocks are still reachable in loss record 2 of 114
+==6426==    at 0x4C2FB0F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==6426==    by 0x538F9B9: strdup (strdup.c:42)
+==6426==    by 0x6431212: _XlcResolveLocaleName (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643498F: ??? (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x6433F42: ??? (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x6434787: _XlcCreateLC (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x64504DF: _XlcDefaultLoader (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643BBBD: _XOpenLC (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643BDFA: _XrmInitParseInfo (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x64239FF: ??? (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x642725D: XrmGetStringDatabase (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x64035F3: ??? (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426== 
+==6426== 7 bytes in 1 blocks are still reachable in loss record 3 of 114
+==6426==    at 0x4C2FB0F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==6426==    by 0x538F9B9: strdup (strdup.c:42)
+==6426==    by 0x6434A75: ??? (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x6433F42: ??? (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x6434787: _XlcCreateLC (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x64504DF: _XlcDefaultLoader (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643BBBD: _XOpenLC (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643BDFA: _XrmInitParseInfo (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x64239FF: ??? (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x642725D: XrmGetStringDatabase (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x64035F3: ??? (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x6403897: XGetDefault (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426== 
+==6426== 8 bytes in 1 blocks are still reachable in loss record 4 of 114
+==6426==    at 0x4C2FB0F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==6426==    by 0x6445B89: _XimOpenIM (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x4E7B73D: ??? (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426==    by 0x4E7C341: ??? (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426==    by 0x4E6C9F7: SDL_VideoInit (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426==    by 0x4E45DCB: SDL_InitSubSystem (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426==    by 0x4E45E32: SDL_Init (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426==    by 0x109F61: Window_init (window.c:10)
+==6426==    by 0x10A0B7: main (test.c:14)
+==6426== 
+==6426== 9 bytes in 1 blocks are definitely lost in loss record 5 of 114
+==6426==    at 0x4C2FB0F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==6426==    by 0x643B984: _XlcDefaultMapModifiers (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643BD75: XSetLocaleModifiers (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x4E7B724: ??? (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426==    by 0x4E7C341: ??? (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426==    by 0x4E6C9F7: SDL_VideoInit (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426==    by 0x4E45DCB: SDL_InitSubSystem (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426==    by 0x4E45E32: SDL_Init (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426==    by 0x109F61: Window_init (window.c:10)
+==6426==    by 0x10A0B7: main (test.c:14)
+==6426== 
+==6426== 10 bytes in 2 blocks are definitely lost in loss record 6 of 114
+==6426==    at 0x4C2FB0F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==6426==    by 0x538F9B9: strdup (strdup.c:42)
+==6426==    by 0x6449906: ??? (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x644C288: _XimEncodeICATTRIBUTE (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643F2B9: _XimProtoCreateIC (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x642C4F8: XCreateIC (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x4E7B589: ??? (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426==    by 0x4E7C341: ??? (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426==    by 0x4E6C9F7: SDL_VideoInit (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426==    by 0x4E45DCB: SDL_InitSubSystem (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426==    by 0x4E45E32: SDL_Init (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426==    by 0x109F61: Window_init (window.c:10)
+==6426== 
+==6426== 16 bytes in 1 blocks are still reachable in loss record 7 of 114
+==6426==    at 0x4C31D2F: realloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==6426==    by 0x64320FC: ??? (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x64325E1: ??? (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x6433F4E: ??? (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x6434787: _XlcCreateLC (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x64504DF: _XlcDefaultLoader (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643BBBD: _XOpenLC (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643BDFA: _XrmInitParseInfo (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x64239FF: ??? (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x642725D: XrmGetStringDatabase (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x64035F3: ??? (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x6403897: XGetDefault (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426== 
+==6426== 16 bytes in 2 blocks are still reachable in loss record 8 of 114
+==6426==    at 0x4C2FB0F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==6426==    by 0x6432B09: ??? (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x6433F4E: ??? (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x6434787: _XlcCreateLC (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x64504DF: _XlcDefaultLoader (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643BBBD: _XOpenLC (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643BDFA: _XrmInitParseInfo (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x64239FF: ??? (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x642725D: XrmGetStringDatabase (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x64035F3: ??? (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x6403897: XGetDefault (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0xC1E7EC2: _XcursorGetDisplayInfo (in /usr/lib/x86_64-linux-gnu/libXcursor.so.1.0.2)
+==6426== 
+==6426== 16 bytes in 2 blocks are indirectly lost in loss record 9 of 114
+==6426==    at 0x4C2FB0F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==6426==    by 0x6432B09: ??? (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x6433F4E: ??? (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x6434787: _XlcCreateLC (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x64504DF: _XlcDefaultLoader (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643BBBD: _XOpenLC (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643BD0A: _XlcCurrentLC (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643BD4D: XSetLocaleModifiers (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x4E7B19E: ??? (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426==    by 0x4E7C341: ??? (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426==    by 0x4E6C9F7: SDL_VideoInit (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426==    by 0x4E45DCB: SDL_InitSubSystem (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426== 
+==6426== 24 bytes in 1 blocks are still reachable in loss record 10 of 114
+==6426==    at 0x4C31B25: calloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==6426==    by 0x6431CC7: ??? (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x6434765: _XlcCreateLC (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x64504DF: _XlcDefaultLoader (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643BBBD: _XOpenLC (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643BDFA: _XrmInitParseInfo (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x64239FF: ??? (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x642725D: XrmGetStringDatabase (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x64035F3: ??? (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x6403897: XGetDefault (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0xC1E7EC2: _XcursorGetDisplayInfo (in /usr/lib/x86_64-linux-gnu/libXcursor.so.1.0.2)
+==6426==    by 0xC1E7F28: XcursorSupportsARGB (in /usr/lib/x86_64-linux-gnu/libXcursor.so.1.0.2)
+==6426== 
+==6426== 24 bytes in 1 blocks are still reachable in loss record 11 of 114
+==6426==    at 0x4C2FB0F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==6426==    by 0x643BBCF: _XOpenLC (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643BDFA: _XrmInitParseInfo (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x64239FF: ??? (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x642725D: XrmGetStringDatabase (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x64035F3: ??? (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x6403897: XGetDefault (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0xC1E7EC2: _XcursorGetDisplayInfo (in /usr/lib/x86_64-linux-gnu/libXcursor.so.1.0.2)
+==6426==    by 0xC1E7F28: XcursorSupportsARGB (in /usr/lib/x86_64-linux-gnu/libXcursor.so.1.0.2)
+==6426==    by 0xC1EA86F: XcursorNoticeCreateBitmap (in /usr/lib/x86_64-linux-gnu/libXcursor.so.1.0.2)
+==6426==    by 0x63FDCE0: XCreatePixmap (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x4E793BF: ??? (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426== 
+==6426== 32 bytes in 1 blocks are still reachable in loss record 12 of 114
+==6426==    at 0x4C31B25: calloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==6426==    by 0x5D897E4: _dlerror_run (dlerror.c:140)
+==6426==    by 0x5D89050: dlopen@@GLIBC_2.2.5 (dlopen.c:87)
+==6426==    by 0x63FD581: ??? (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x63FD6AE: _XNoticeCreateBitmap (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x63FDCE0: XCreatePixmap (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x4E793BF: ??? (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426==    by 0x4E7C373: ??? (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426==    by 0x4E6C9F7: SDL_VideoInit (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426==    by 0x4E45DCB: SDL_InitSubSystem (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426==    by 0x4E45E32: SDL_Init (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426==    by 0x109F61: Window_init (window.c:10)
+==6426== 
+==6426== 40 bytes in 1 blocks are still reachable in loss record 13 of 114
+==6426==    at 0x4C2FB0F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==6426==    by 0x643088C: _XlcCreateLocaleDataBase (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x64349C7: ??? (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x6433F42: ??? (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x6434787: _XlcCreateLC (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x64504DF: _XlcDefaultLoader (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643BBBD: _XOpenLC (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643BDFA: _XrmInitParseInfo (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x64239FF: ??? (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x642725D: XrmGetStringDatabase (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x64035F3: ??? (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x6403897: XGetDefault (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426== 
+==6426== 42 bytes in 1 blocks are still reachable in loss record 14 of 114
+==6426==    at 0x4C2FB0F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==6426==    by 0x401D329: strdup (strdup.c:42)
+==6426==    by 0x4018656: _dl_load_cache_lookup (dl-cache.c:315)
+==6426==    by 0x4009382: _dl_map_object (dl-load.c:2255)
+==6426==    by 0x4014EE3: dl_open_worker (dl-open.c:235)
+==6426==    by 0x54592DE: _dl_catch_exception (dl-error-skeleton.c:196)
+==6426==    by 0x40147C9: _dl_open (dl-open.c:605)
+==6426==    by 0x5D88F95: dlopen_doit (dlopen.c:66)
+==6426==    by 0x54592DE: _dl_catch_exception (dl-error-skeleton.c:196)
+==6426==    by 0x545936E: _dl_catch_error (dl-error-skeleton.c:215)
+==6426==    by 0x5D89734: _dlerror_run (dlerror.c:162)
+==6426==    by 0x5D89050: dlopen@@GLIBC_2.2.5 (dlopen.c:87)
+==6426== 
+==6426== 42 bytes in 1 blocks are still reachable in loss record 15 of 114
+==6426==    at 0x4C2FB0F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==6426==    by 0x400C3E7: _dl_new_object (dl-object.c:163)
+==6426==    by 0x40069A4: _dl_map_object_from_fd (dl-load.c:943)
+==6426==    by 0x4008FFB: _dl_map_object (dl-load.c:2389)
+==6426==    by 0x4014EE3: dl_open_worker (dl-open.c:235)
+==6426==    by 0x54592DE: _dl_catch_exception (dl-error-skeleton.c:196)
+==6426==    by 0x40147C9: _dl_open (dl-open.c:605)
+==6426==    by 0x5D88F95: dlopen_doit (dlopen.c:66)
+==6426==    by 0x54592DE: _dl_catch_exception (dl-error-skeleton.c:196)
+==6426==    by 0x545936E: _dl_catch_error (dl-error-skeleton.c:215)
+==6426==    by 0x5D89734: _dlerror_run (dlerror.c:162)
+==6426==    by 0x5D89050: dlopen@@GLIBC_2.2.5 (dlopen.c:87)
+==6426== 
+==6426== 47 bytes in 5 blocks are still reachable in loss record 16 of 114
+==6426==    at 0x4C2FB0F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==6426==    by 0x642E316: _XlcAddCT (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x642E54B: _XlcInitCTInfo (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x6434872: ??? (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x6433F42: ??? (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x6434787: _XlcCreateLC (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x64544EF: _XlcUtf8Loader (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643BBBD: _XOpenLC (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643BD0A: _XlcCurrentLC (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643BD4D: XSetLocaleModifiers (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x4E7B19E: ??? (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426==    by 0x4E7C341: ??? (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426== 
+==6426== 64 bytes in 1 blocks are still reachable in loss record 17 of 114
+==6426==    at 0x4C2FB0F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==6426==    by 0x6414DF1: _XrmInternalStringToQuark (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x642E608: _XlcGetCharSet (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x642E228: _XlcAddCT (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x642E54B: _XlcInitCTInfo (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x6434872: ??? (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x6433F42: ??? (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x6434787: _XlcCreateLC (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x64544EF: _XlcUtf8Loader (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643BBBD: _XOpenLC (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643BD0A: _XlcCurrentLC (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643BD4D: XSetLocaleModifiers (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426== 
+==6426== 64 bytes in 1 blocks are still reachable in loss record 18 of 114
+==6426==    at 0x4C2FB0F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==6426==    by 0x642ED55: _XlcSetConverter (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x642E599: _XlcInitCTInfo (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x6434872: ??? (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x6433F42: ??? (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x6434787: _XlcCreateLC (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x64544EF: _XlcUtf8Loader (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643BBBD: _XOpenLC (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643BD0A: _XlcCurrentLC (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643BD4D: XSetLocaleModifiers (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x4E7B19E: ??? (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426==    by 0x4E7C341: ??? (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426== 
+==6426== 64 bytes in 1 blocks are still reachable in loss record 19 of 114
+==6426==    at 0x4C2FB0F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==6426==    by 0x642ED55: _XlcSetConverter (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x642E5B7: _XlcInitCTInfo (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x6434872: ??? (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x6433F42: ??? (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x6434787: _XlcCreateLC (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x64544EF: _XlcUtf8Loader (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643BBBD: _XOpenLC (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643BD0A: _XlcCurrentLC (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643BD4D: XSetLocaleModifiers (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x4E7B19E: ??? (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426==    by 0x4E7C341: ??? (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426== 
+==6426== 64 bytes in 1 blocks are still reachable in loss record 20 of 114
+==6426==    at 0x4C2FB0F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==6426==    by 0x642ED55: _XlcSetConverter (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x642E5D5: _XlcInitCTInfo (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x6434872: ??? (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x6433F42: ??? (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x6434787: _XlcCreateLC (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x64544EF: _XlcUtf8Loader (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643BBBD: _XOpenLC (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643BD0A: _XlcCurrentLC (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643BD4D: XSetLocaleModifiers (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x4E7B19E: ??? (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426==    by 0x4E7C341: ??? (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426== 
+==6426== 64 bytes in 1 blocks are still reachable in loss record 21 of 114
+==6426==    at 0x4C2FB0F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==6426==    by 0x642ED55: _XlcSetConverter (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x642E5F3: _XlcInitCTInfo (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x6434872: ??? (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x6433F42: ??? (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x6434787: _XlcCreateLC (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x64544EF: _XlcUtf8Loader (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643BBBD: _XOpenLC (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643BD0A: _XlcCurrentLC (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643BD4D: XSetLocaleModifiers (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x4E7B19E: ??? (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426==    by 0x4E7C341: ??? (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426== 
+==6426== 64 bytes in 1 blocks are still reachable in loss record 22 of 114
+==6426==    at 0x4C2FB0F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==6426==    by 0x642ED55: _XlcSetConverter (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x6450519: _XlcDefaultLoader (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643BBBD: _XOpenLC (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643BD0A: _XlcCurrentLC (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643BD4D: XSetLocaleModifiers (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x4E7B19E: ??? (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426==    by 0x4E7C341: ??? (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426==    by 0x4E6C9F7: SDL_VideoInit (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426==    by 0x4E45DCB: SDL_InitSubSystem (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426==    by 0x4E45E32: SDL_Init (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426==    by 0x109F61: Window_init (window.c:10)
+==6426== 
+==6426== 64 bytes in 1 blocks are still reachable in loss record 23 of 114
+==6426==    at 0x4C2FB0F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==6426==    by 0x642ED55: _XlcSetConverter (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x6450539: _XlcDefaultLoader (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643BBBD: _XOpenLC (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643BD0A: _XlcCurrentLC (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643BD4D: XSetLocaleModifiers (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x4E7B19E: ??? (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426==    by 0x4E7C341: ??? (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426==    by 0x4E6C9F7: SDL_VideoInit (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426==    by 0x4E45DCB: SDL_InitSubSystem (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426==    by 0x4E45E32: SDL_Init (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426==    by 0x109F61: Window_init (window.c:10)
+==6426== 
+==6426== 64 bytes in 1 blocks are still reachable in loss record 24 of 114
+==6426==    at 0x4C2FB0F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==6426==    by 0x642ED55: _XlcSetConverter (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x6450559: _XlcDefaultLoader (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643BBBD: _XOpenLC (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643BD0A: _XlcCurrentLC (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643BD4D: XSetLocaleModifiers (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x4E7B19E: ??? (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426==    by 0x4E7C341: ??? (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426==    by 0x4E6C9F7: SDL_VideoInit (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426==    by 0x4E45DCB: SDL_InitSubSystem (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426==    by 0x4E45E32: SDL_Init (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426==    by 0x109F61: Window_init (window.c:10)
+==6426== 
+==6426== 64 bytes in 1 blocks are still reachable in loss record 25 of 114
+==6426==    at 0x4C2FB0F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==6426==    by 0x642ED55: _XlcSetConverter (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x6450579: _XlcDefaultLoader (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643BBBD: _XOpenLC (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643BD0A: _XlcCurrentLC (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643BD4D: XSetLocaleModifiers (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x4E7B19E: ??? (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426==    by 0x4E7C341: ??? (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426==    by 0x4E6C9F7: SDL_VideoInit (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426==    by 0x4E45DCB: SDL_InitSubSystem (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426==    by 0x4E45E32: SDL_Init (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426==    by 0x109F61: Window_init (window.c:10)
+==6426== 
+==6426== 64 bytes in 1 blocks are still reachable in loss record 26 of 114
+==6426==    at 0x4C2FB0F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==6426==    by 0x642ED55: _XlcSetConverter (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x6450599: _XlcDefaultLoader (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643BBBD: _XOpenLC (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643BD0A: _XlcCurrentLC (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643BD4D: XSetLocaleModifiers (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x4E7B19E: ??? (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426==    by 0x4E7C341: ??? (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426==    by 0x4E6C9F7: SDL_VideoInit (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426==    by 0x4E45DCB: SDL_InitSubSystem (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426==    by 0x4E45E32: SDL_Init (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426==    by 0x109F61: Window_init (window.c:10)
+==6426== 
+==6426== 64 bytes in 1 blocks are still reachable in loss record 27 of 114
+==6426==    at 0x4C2FB0F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==6426==    by 0x642ED55: _XlcSetConverter (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x64505B9: _XlcDefaultLoader (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643BBBD: _XOpenLC (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643BD0A: _XlcCurrentLC (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643BD4D: XSetLocaleModifiers (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x4E7B19E: ??? (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426==    by 0x4E7C341: ??? (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426==    by 0x4E6C9F7: SDL_VideoInit (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426==    by 0x4E45DCB: SDL_InitSubSystem (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426==    by 0x4E45E32: SDL_Init (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426==    by 0x109F61: Window_init (window.c:10)
+==6426== 
+==6426== 64 bytes in 1 blocks are still reachable in loss record 28 of 114
+==6426==    at 0x4C2FB0F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==6426==    by 0x642ED55: _XlcSetConverter (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x64505D9: _XlcDefaultLoader (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643BBBD: _XOpenLC (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643BD0A: _XlcCurrentLC (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643BD4D: XSetLocaleModifiers (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x4E7B19E: ??? (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426==    by 0x4E7C341: ??? (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426==    by 0x4E6C9F7: SDL_VideoInit (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426==    by 0x4E45DCB: SDL_InitSubSystem (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426==    by 0x4E45E32: SDL_Init (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426==    by 0x109F61: Window_init (window.c:10)
+==6426== 
+==6426== 64 bytes in 1 blocks are still reachable in loss record 29 of 114
+==6426==    at 0x4C2FB0F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==6426==    by 0x642ED55: _XlcSetConverter (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x64505F9: _XlcDefaultLoader (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643BBBD: _XOpenLC (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643BD0A: _XlcCurrentLC (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643BD4D: XSetLocaleModifiers (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x4E7B19E: ??? (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426==    by 0x4E7C341: ??? (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426==    by 0x4E6C9F7: SDL_VideoInit (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426==    by 0x4E45DCB: SDL_InitSubSystem (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426==    by 0x4E45E32: SDL_Init (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426==    by 0x109F61: Window_init (window.c:10)
+==6426== 
+==6426== 64 bytes in 1 blocks are still reachable in loss record 30 of 114
+==6426==    at 0x4C2FB0F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==6426==    by 0x642ED55: _XlcSetConverter (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x6450619: _XlcDefaultLoader (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643BBBD: _XOpenLC (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643BD0A: _XlcCurrentLC (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643BD4D: XSetLocaleModifiers (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x4E7B19E: ??? (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426==    by 0x4E7C341: ??? (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426==    by 0x4E6C9F7: SDL_VideoInit (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426==    by 0x4E45DCB: SDL_InitSubSystem (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426==    by 0x4E45E32: SDL_Init (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426==    by 0x109F61: Window_init (window.c:10)
+==6426== 
+==6426== 64 bytes in 1 blocks are still reachable in loss record 31 of 114
+==6426==    at 0x4C2FB0F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==6426==    by 0x642ED55: _XlcSetConverter (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x6450639: _XlcDefaultLoader (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643BBBD: _XOpenLC (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643BD0A: _XlcCurrentLC (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643BD4D: XSetLocaleModifiers (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x4E7B19E: ??? (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426==    by 0x4E7C341: ??? (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426==    by 0x4E6C9F7: SDL_VideoInit (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426==    by 0x4E45DCB: SDL_InitSubSystem (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426==    by 0x4E45E32: SDL_Init (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426==    by 0x109F61: Window_init (window.c:10)
+==6426== 
+==6426== 64 bytes in 1 blocks are still reachable in loss record 32 of 114
+==6426==    at 0x4C2FB0F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==6426==    by 0x642ED55: _XlcSetConverter (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x6450659: _XlcDefaultLoader (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643BBBD: _XOpenLC (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643BD0A: _XlcCurrentLC (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643BD4D: XSetLocaleModifiers (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x4E7B19E: ??? (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426==    by 0x4E7C341: ??? (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426==    by 0x4E6C9F7: SDL_VideoInit (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426==    by 0x4E45DCB: SDL_InitSubSystem (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426==    by 0x4E45E32: SDL_Init (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426==    by 0x109F61: Window_init (window.c:10)
+==6426== 
+==6426== 64 bytes in 1 blocks are still reachable in loss record 33 of 114
+==6426==    at 0x4C2FB0F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==6426==    by 0x642ED55: _XlcSetConverter (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643B2D0: _XlcAddUtf8Converters (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x6450661: _XlcDefaultLoader (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643BBBD: _XOpenLC (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643BD0A: _XlcCurrentLC (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643BD4D: XSetLocaleModifiers (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x4E7B19E: ??? (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426==    by 0x4E7C341: ??? (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426==    by 0x4E6C9F7: SDL_VideoInit (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426==    by 0x4E45DCB: SDL_InitSubSystem (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426==    by 0x4E45E32: SDL_Init (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426== 
+==6426== 64 bytes in 1 blocks are still reachable in loss record 34 of 114
+==6426==    at 0x4C2FB0F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==6426==    by 0x642ED55: _XlcSetConverter (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643B2F0: _XlcAddUtf8Converters (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x6450661: _XlcDefaultLoader (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643BBBD: _XOpenLC (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643BD0A: _XlcCurrentLC (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643BD4D: XSetLocaleModifiers (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x4E7B19E: ??? (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426==    by 0x4E7C341: ??? (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426==    by 0x4E6C9F7: SDL_VideoInit (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426==    by 0x4E45DCB: SDL_InitSubSystem (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426==    by 0x4E45E32: SDL_Init (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426== 
+==6426== 64 bytes in 1 blocks are still reachable in loss record 35 of 114
+==6426==    at 0x4C2FB0F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==6426==    by 0x642ED55: _XlcSetConverter (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643B310: _XlcAddUtf8Converters (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x6450661: _XlcDefaultLoader (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643BBBD: _XOpenLC (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643BD0A: _XlcCurrentLC (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643BD4D: XSetLocaleModifiers (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x4E7B19E: ??? (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426==    by 0x4E7C341: ??? (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426==    by 0x4E6C9F7: SDL_VideoInit (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426==    by 0x4E45DCB: SDL_InitSubSystem (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426==    by 0x4E45E32: SDL_Init (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426== 
+==6426== 64 bytes in 1 blocks are still reachable in loss record 36 of 114
+==6426==    at 0x4C2FB0F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==6426==    by 0x642ED55: _XlcSetConverter (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643B330: _XlcAddUtf8Converters (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x6450661: _XlcDefaultLoader (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643BBBD: _XOpenLC (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643BD0A: _XlcCurrentLC (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643BD4D: XSetLocaleModifiers (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x4E7B19E: ??? (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426==    by 0x4E7C341: ??? (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426==    by 0x4E6C9F7: SDL_VideoInit (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426==    by 0x4E45DCB: SDL_InitSubSystem (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426==    by 0x4E45E32: SDL_Init (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426== 
+==6426== 64 bytes in 1 blocks are still reachable in loss record 37 of 114
+==6426==    at 0x4C2FB0F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==6426==    by 0x642ED55: _XlcSetConverter (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643B350: _XlcAddUtf8Converters (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x6450661: _XlcDefaultLoader (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643BBBD: _XOpenLC (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643BD0A: _XlcCurrentLC (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643BD4D: XSetLocaleModifiers (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x4E7B19E: ??? (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426==    by 0x4E7C341: ??? (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426==    by 0x4E6C9F7: SDL_VideoInit (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426==    by 0x4E45DCB: SDL_InitSubSystem (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426==    by 0x4E45E32: SDL_Init (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426== 
+==6426== 64 bytes in 1 blocks are still reachable in loss record 38 of 114
+==6426==    at 0x4C2FB0F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==6426==    by 0x642ED55: _XlcSetConverter (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643B370: _XlcAddUtf8Converters (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x6450661: _XlcDefaultLoader (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643BBBD: _XOpenLC (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643BD0A: _XlcCurrentLC (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643BD4D: XSetLocaleModifiers (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x4E7B19E: ??? (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426==    by 0x4E7C341: ??? (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426==    by 0x4E6C9F7: SDL_VideoInit (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426==    by 0x4E45DCB: SDL_InitSubSystem (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426==    by 0x4E45E32: SDL_Init (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426== 
+==6426== 64 bytes in 1 blocks are still reachable in loss record 39 of 114
+==6426==    at 0x4C2FB0F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==6426==    by 0x642ED55: _XlcSetConverter (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x6450661: _XlcDefaultLoader (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643BBBD: _XOpenLC (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643BD0A: _XlcCurrentLC (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643BD4D: XSetLocaleModifiers (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x4E7B19E: ??? (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426==    by 0x4E7C341: ??? (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426==    by 0x4E6C9F7: SDL_VideoInit (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426==    by 0x4E45DCB: SDL_InitSubSystem (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426==    by 0x4E45E32: SDL_Init (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426==    by 0x109F61: Window_init (window.c:10)
+==6426== 
+==6426== 64 bytes in 1 blocks are still reachable in loss record 40 of 114
+==6426==    at 0x4C2FB0F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==6426==    by 0x642ED55: _XlcSetConverter (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643B3C0: _XlcAddUtf8LocaleConverters (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x645454F: _XlcUtf8Loader (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643BBBD: _XOpenLC (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643BD0A: _XlcCurrentLC (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643BD4D: XSetLocaleModifiers (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x4E7B724: ??? (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426==    by 0x4E7C341: ??? (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426==    by 0x4E6C9F7: SDL_VideoInit (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426==    by 0x4E45DCB: SDL_InitSubSystem (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426==    by 0x4E45E32: SDL_Init (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426== 
+==6426== 64 bytes in 1 blocks are still reachable in loss record 41 of 114
+==6426==    at 0x4C2FB0F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==6426==    by 0x642ED55: _XlcSetConverter (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643B3E0: _XlcAddUtf8LocaleConverters (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x645454F: _XlcUtf8Loader (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643BBBD: _XOpenLC (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643BD0A: _XlcCurrentLC (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643BD4D: XSetLocaleModifiers (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x4E7B724: ??? (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426==    by 0x4E7C341: ??? (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426==    by 0x4E6C9F7: SDL_VideoInit (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426==    by 0x4E45DCB: SDL_InitSubSystem (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426==    by 0x4E45E32: SDL_Init (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426== 
+==6426== 64 bytes in 1 blocks are still reachable in loss record 42 of 114
+==6426==    at 0x4C2FB0F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==6426==    by 0x642ED55: _XlcSetConverter (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643B400: _XlcAddUtf8LocaleConverters (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x645454F: _XlcUtf8Loader (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643BBBD: _XOpenLC (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643BD0A: _XlcCurrentLC (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643BD4D: XSetLocaleModifiers (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x4E7B724: ??? (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426==    by 0x4E7C341: ??? (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426==    by 0x4E6C9F7: SDL_VideoInit (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426==    by 0x4E45DCB: SDL_InitSubSystem (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426==    by 0x4E45E32: SDL_Init (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426== 
+==6426== 64 bytes in 1 blocks are still reachable in loss record 43 of 114
+==6426==    at 0x4C2FB0F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==6426==    by 0x642ED55: _XlcSetConverter (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643B420: _XlcAddUtf8LocaleConverters (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x645454F: _XlcUtf8Loader (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643BBBD: _XOpenLC (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643BD0A: _XlcCurrentLC (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643BD4D: XSetLocaleModifiers (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x4E7B724: ??? (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426==    by 0x4E7C341: ??? (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426==    by 0x4E6C9F7: SDL_VideoInit (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426==    by 0x4E45DCB: SDL_InitSubSystem (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426==    by 0x4E45E32: SDL_Init (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426== 
+==6426== 64 bytes in 1 blocks are still reachable in loss record 44 of 114
+==6426==    at 0x4C2FB0F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==6426==    by 0x642ED55: _XlcSetConverter (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643B440: _XlcAddUtf8LocaleConverters (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x645454F: _XlcUtf8Loader (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643BBBD: _XOpenLC (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643BD0A: _XlcCurrentLC (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643BD4D: XSetLocaleModifiers (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x4E7B724: ??? (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426==    by 0x4E7C341: ??? (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426==    by 0x4E6C9F7: SDL_VideoInit (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426==    by 0x4E45DCB: SDL_InitSubSystem (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426==    by 0x4E45E32: SDL_Init (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426== 
+==6426== 64 bytes in 1 blocks are still reachable in loss record 45 of 114
+==6426==    at 0x4C2FB0F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==6426==    by 0x642ED55: _XlcSetConverter (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643B460: _XlcAddUtf8LocaleConverters (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x645454F: _XlcUtf8Loader (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643BBBD: _XOpenLC (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643BD0A: _XlcCurrentLC (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643BD4D: XSetLocaleModifiers (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x4E7B724: ??? (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426==    by 0x4E7C341: ??? (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426==    by 0x4E6C9F7: SDL_VideoInit (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426==    by 0x4E45DCB: SDL_InitSubSystem (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426==    by 0x4E45E32: SDL_Init (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426== 
+==6426== 64 bytes in 1 blocks are still reachable in loss record 46 of 114
+==6426==    at 0x4C2FB0F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==6426==    by 0x642ED55: _XlcSetConverter (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643B480: _XlcAddUtf8LocaleConverters (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x645454F: _XlcUtf8Loader (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643BBBD: _XOpenLC (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643BD0A: _XlcCurrentLC (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643BD4D: XSetLocaleModifiers (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x4E7B724: ??? (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426==    by 0x4E7C341: ??? (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426==    by 0x4E6C9F7: SDL_VideoInit (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426==    by 0x4E45DCB: SDL_InitSubSystem (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426==    by 0x4E45E32: SDL_Init (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426== 
+==6426== 64 bytes in 1 blocks are still reachable in loss record 47 of 114
+==6426==    at 0x4C2FB0F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==6426==    by 0x642ED55: _XlcSetConverter (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643B4A0: _XlcAddUtf8LocaleConverters (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x645454F: _XlcUtf8Loader (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643BBBD: _XOpenLC (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643BD0A: _XlcCurrentLC (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643BD4D: XSetLocaleModifiers (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x4E7B724: ??? (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426==    by 0x4E7C341: ??? (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426==    by 0x4E6C9F7: SDL_VideoInit (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426==    by 0x4E45DCB: SDL_InitSubSystem (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426==    by 0x4E45E32: SDL_Init (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426== 
+==6426== 64 bytes in 1 blocks are still reachable in loss record 48 of 114
+==6426==    at 0x4C2FB0F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==6426==    by 0x642ED55: _XlcSetConverter (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643B4C0: _XlcAddUtf8LocaleConverters (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x645454F: _XlcUtf8Loader (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643BBBD: _XOpenLC (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643BD0A: _XlcCurrentLC (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643BD4D: XSetLocaleModifiers (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x4E7B724: ??? (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426==    by 0x4E7C341: ??? (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426==    by 0x4E6C9F7: SDL_VideoInit (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426==    by 0x4E45DCB: SDL_InitSubSystem (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426==    by 0x4E45E32: SDL_Init (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426== 
+==6426== 64 bytes in 1 blocks are still reachable in loss record 49 of 114
+==6426==    at 0x4C2FB0F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==6426==    by 0x642ED55: _XlcSetConverter (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643B4E0: _XlcAddUtf8LocaleConverters (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x645454F: _XlcUtf8Loader (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643BBBD: _XOpenLC (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643BD0A: _XlcCurrentLC (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643BD4D: XSetLocaleModifiers (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x4E7B724: ??? (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426==    by 0x4E7C341: ??? (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426==    by 0x4E6C9F7: SDL_VideoInit (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426==    by 0x4E45DCB: SDL_InitSubSystem (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426==    by 0x4E45E32: SDL_Init (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426== 
+==6426== 64 bytes in 1 blocks are still reachable in loss record 50 of 114
+==6426==    at 0x4C2FB0F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==6426==    by 0x642ED55: _XlcSetConverter (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643B500: _XlcAddUtf8LocaleConverters (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x645454F: _XlcUtf8Loader (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643BBBD: _XOpenLC (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643BD0A: _XlcCurrentLC (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643BD4D: XSetLocaleModifiers (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x4E7B724: ??? (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426==    by 0x4E7C341: ??? (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426==    by 0x4E6C9F7: SDL_VideoInit (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426==    by 0x4E45DCB: SDL_InitSubSystem (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426==    by 0x4E45E32: SDL_Init (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426== 
+==6426== 64 bytes in 1 blocks are still reachable in loss record 51 of 114
+==6426==    at 0x4C2FB0F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==6426==    by 0x642ED55: _XlcSetConverter (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643B520: _XlcAddUtf8LocaleConverters (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x645454F: _XlcUtf8Loader (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643BBBD: _XOpenLC (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643BD0A: _XlcCurrentLC (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643BD4D: XSetLocaleModifiers (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x4E7B724: ??? (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426==    by 0x4E7C341: ??? (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426==    by 0x4E6C9F7: SDL_VideoInit (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426==    by 0x4E45DCB: SDL_InitSubSystem (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426==    by 0x4E45E32: SDL_Init (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426== 
+==6426== 64 bytes in 1 blocks are still reachable in loss record 52 of 114
+==6426==    at 0x4C2FB0F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==6426==    by 0x642ED55: _XlcSetConverter (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643B540: _XlcAddUtf8LocaleConverters (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x645454F: _XlcUtf8Loader (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643BBBD: _XOpenLC (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643BD0A: _XlcCurrentLC (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643BD4D: XSetLocaleModifiers (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x4E7B724: ??? (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426==    by 0x4E7C341: ??? (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426==    by 0x4E6C9F7: SDL_VideoInit (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426==    by 0x4E45DCB: SDL_InitSubSystem (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426==    by 0x4E45E32: SDL_Init (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426== 
+==6426== 64 bytes in 1 blocks are still reachable in loss record 53 of 114
+==6426==    at 0x4C2FB0F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==6426==    by 0x642ED55: _XlcSetConverter (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643B560: _XlcAddUtf8LocaleConverters (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x645454F: _XlcUtf8Loader (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643BBBD: _XOpenLC (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643BD0A: _XlcCurrentLC (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643BD4D: XSetLocaleModifiers (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x4E7B724: ??? (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426==    by 0x4E7C341: ??? (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426==    by 0x4E6C9F7: SDL_VideoInit (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426==    by 0x4E45DCB: SDL_InitSubSystem (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426==    by 0x4E45E32: SDL_Init (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426== 
+==6426== 64 bytes in 1 blocks are still reachable in loss record 54 of 114
+==6426==    at 0x4C2FB0F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==6426==    by 0x642ED55: _XlcSetConverter (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643B580: _XlcAddUtf8LocaleConverters (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x645454F: _XlcUtf8Loader (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643BBBD: _XOpenLC (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643BD0A: _XlcCurrentLC (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643BD4D: XSetLocaleModifiers (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x4E7B724: ??? (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426==    by 0x4E7C341: ??? (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426==    by 0x4E6C9F7: SDL_VideoInit (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426==    by 0x4E45DCB: SDL_InitSubSystem (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426==    by 0x4E45E32: SDL_Init (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426== 
+==6426== 64 bytes in 1 blocks are still reachable in loss record 55 of 114
+==6426==    at 0x4C2FB0F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==6426==    by 0x642ED55: _XlcSetConverter (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x645454F: _XlcUtf8Loader (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643BBBD: _XOpenLC (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643BD0A: _XlcCurrentLC (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643BD4D: XSetLocaleModifiers (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x4E7B724: ??? (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426==    by 0x4E7C341: ??? (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426==    by 0x4E6C9F7: SDL_VideoInit (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426==    by 0x4E45DCB: SDL_InitSubSystem (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426==    by 0x4E45E32: SDL_Init (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426==    by 0x109F61: Window_init (window.c:10)
+==6426== 
+==6426== 64 bytes in 1 blocks are still reachable in loss record 56 of 114
+==6426==    at 0x4C2FB0F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==6426==    by 0x642ED55: _XlcSetConverter (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643B2D0: _XlcAddUtf8Converters (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x645453C: _XlcUtf8Loader (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643BBBD: _XOpenLC (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643BD0A: _XlcCurrentLC (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643BD4D: XSetLocaleModifiers (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x4E7B724: ??? (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426==    by 0x4E7C341: ??? (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426==    by 0x4E6C9F7: SDL_VideoInit (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426==    by 0x4E45DCB: SDL_InitSubSystem (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426==    by 0x4E45E32: SDL_Init (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426== 
+==6426== 64 bytes in 1 blocks are still reachable in loss record 57 of 114
+==6426==    at 0x4C2FB0F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==6426==    by 0x642ED55: _XlcSetConverter (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643B2F0: _XlcAddUtf8Converters (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x645453C: _XlcUtf8Loader (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643BBBD: _XOpenLC (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643BD0A: _XlcCurrentLC (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643BD4D: XSetLocaleModifiers (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x4E7B724: ??? (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426==    by 0x4E7C341: ??? (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426==    by 0x4E6C9F7: SDL_VideoInit (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426==    by 0x4E45DCB: SDL_InitSubSystem (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426==    by 0x4E45E32: SDL_Init (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426== 
+==6426== 64 bytes in 1 blocks are still reachable in loss record 58 of 114
+==6426==    at 0x4C2FB0F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==6426==    by 0x642ED55: _XlcSetConverter (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643B310: _XlcAddUtf8Converters (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x645453C: _XlcUtf8Loader (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643BBBD: _XOpenLC (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643BD0A: _XlcCurrentLC (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643BD4D: XSetLocaleModifiers (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x4E7B724: ??? (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426==    by 0x4E7C341: ??? (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426==    by 0x4E6C9F7: SDL_VideoInit (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426==    by 0x4E45DCB: SDL_InitSubSystem (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426==    by 0x4E45E32: SDL_Init (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426== 
+==6426== 64 bytes in 1 blocks are still reachable in loss record 59 of 114
+==6426==    at 0x4C2FB0F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==6426==    by 0x642ED55: _XlcSetConverter (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643B330: _XlcAddUtf8Converters (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x645453C: _XlcUtf8Loader (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643BBBD: _XOpenLC (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643BD0A: _XlcCurrentLC (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643BD4D: XSetLocaleModifiers (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x4E7B724: ??? (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426==    by 0x4E7C341: ??? (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426==    by 0x4E6C9F7: SDL_VideoInit (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426==    by 0x4E45DCB: SDL_InitSubSystem (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426==    by 0x4E45E32: SDL_Init (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426== 
+==6426== 64 bytes in 1 blocks are still reachable in loss record 60 of 114
+==6426==    at 0x4C2FB0F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==6426==    by 0x642ED55: _XlcSetConverter (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643B350: _XlcAddUtf8Converters (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x645453C: _XlcUtf8Loader (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643BBBD: _XOpenLC (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643BD0A: _XlcCurrentLC (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643BD4D: XSetLocaleModifiers (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x4E7B724: ??? (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426==    by 0x4E7C341: ??? (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426==    by 0x4E6C9F7: SDL_VideoInit (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426==    by 0x4E45DCB: SDL_InitSubSystem (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426==    by 0x4E45E32: SDL_Init (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426== 
+==6426== 64 bytes in 1 blocks are still reachable in loss record 61 of 114
+==6426==    at 0x4C2FB0F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==6426==    by 0x642ED55: _XlcSetConverter (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643B370: _XlcAddUtf8Converters (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x645453C: _XlcUtf8Loader (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643BBBD: _XOpenLC (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643BD0A: _XlcCurrentLC (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643BD4D: XSetLocaleModifiers (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x4E7B724: ??? (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426==    by 0x4E7C341: ??? (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426==    by 0x4E6C9F7: SDL_VideoInit (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426==    by 0x4E45DCB: SDL_InitSubSystem (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426==    by 0x4E45E32: SDL_Init (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426== 
+==6426== 64 bytes in 1 blocks are still reachable in loss record 62 of 114
+==6426==    at 0x4C2FB0F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==6426==    by 0x642ED55: _XlcSetConverter (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x645453C: _XlcUtf8Loader (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643BBBD: _XOpenLC (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643BD0A: _XlcCurrentLC (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643BD4D: XSetLocaleModifiers (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x4E7B724: ??? (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426==    by 0x4E7C341: ??? (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426==    by 0x4E6C9F7: SDL_VideoInit (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426==    by 0x4E45DCB: SDL_InitSubSystem (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426==    by 0x4E45E32: SDL_Init (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426==    by 0x109F61: Window_init (window.c:10)
+==6426== 
+==6426== 64 bytes in 1 blocks are still reachable in loss record 63 of 114
+==6426==    at 0x4C2FB0F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==6426==    by 0x642ED55: _XlcSetConverter (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x6450519: _XlcDefaultLoader (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643BBBD: _XOpenLC (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643BDFA: _XrmInitParseInfo (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x64239FF: ??? (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x642725D: XrmGetStringDatabase (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x64035F3: ??? (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x6403897: XGetDefault (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0xC1E7EC2: _XcursorGetDisplayInfo (in /usr/lib/x86_64-linux-gnu/libXcursor.so.1.0.2)
+==6426==    by 0xC1E7F28: XcursorSupportsARGB (in /usr/lib/x86_64-linux-gnu/libXcursor.so.1.0.2)
+==6426==    by 0xC1EA86F: XcursorNoticeCreateBitmap (in /usr/lib/x86_64-linux-gnu/libXcursor.so.1.0.2)
+==6426== 
+==6426== 64 bytes in 1 blocks are still reachable in loss record 64 of 114
+==6426==    at 0x4C2FB0F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==6426==    by 0x642ED55: _XlcSetConverter (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x6450539: _XlcDefaultLoader (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643BBBD: _XOpenLC (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643BDFA: _XrmInitParseInfo (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x64239FF: ??? (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x642725D: XrmGetStringDatabase (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x64035F3: ??? (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x6403897: XGetDefault (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0xC1E7EC2: _XcursorGetDisplayInfo (in /usr/lib/x86_64-linux-gnu/libXcursor.so.1.0.2)
+==6426==    by 0xC1E7F28: XcursorSupportsARGB (in /usr/lib/x86_64-linux-gnu/libXcursor.so.1.0.2)
+==6426==    by 0xC1EA86F: XcursorNoticeCreateBitmap (in /usr/lib/x86_64-linux-gnu/libXcursor.so.1.0.2)
+==6426== 
+==6426== 64 bytes in 1 blocks are still reachable in loss record 65 of 114
+==6426==    at 0x4C2FB0F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==6426==    by 0x642ED55: _XlcSetConverter (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x6450559: _XlcDefaultLoader (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643BBBD: _XOpenLC (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643BDFA: _XrmInitParseInfo (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x64239FF: ??? (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x642725D: XrmGetStringDatabase (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x64035F3: ??? (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x6403897: XGetDefault (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0xC1E7EC2: _XcursorGetDisplayInfo (in /usr/lib/x86_64-linux-gnu/libXcursor.so.1.0.2)
+==6426==    by 0xC1E7F28: XcursorSupportsARGB (in /usr/lib/x86_64-linux-gnu/libXcursor.so.1.0.2)
+==6426==    by 0xC1EA86F: XcursorNoticeCreateBitmap (in /usr/lib/x86_64-linux-gnu/libXcursor.so.1.0.2)
+==6426== 
+==6426== 64 bytes in 1 blocks are still reachable in loss record 66 of 114
+==6426==    at 0x4C2FB0F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==6426==    by 0x642ED55: _XlcSetConverter (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x6450579: _XlcDefaultLoader (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643BBBD: _XOpenLC (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643BDFA: _XrmInitParseInfo (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x64239FF: ??? (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x642725D: XrmGetStringDatabase (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x64035F3: ??? (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x6403897: XGetDefault (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0xC1E7EC2: _XcursorGetDisplayInfo (in /usr/lib/x86_64-linux-gnu/libXcursor.so.1.0.2)
+==6426==    by 0xC1E7F28: XcursorSupportsARGB (in /usr/lib/x86_64-linux-gnu/libXcursor.so.1.0.2)
+==6426==    by 0xC1EA86F: XcursorNoticeCreateBitmap (in /usr/lib/x86_64-linux-gnu/libXcursor.so.1.0.2)
+==6426== 
+==6426== 64 bytes in 1 blocks are still reachable in loss record 67 of 114
+==6426==    at 0x4C2FB0F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==6426==    by 0x642ED55: _XlcSetConverter (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x6450599: _XlcDefaultLoader (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643BBBD: _XOpenLC (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643BDFA: _XrmInitParseInfo (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x64239FF: ??? (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x642725D: XrmGetStringDatabase (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x64035F3: ??? (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x6403897: XGetDefault (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0xC1E7EC2: _XcursorGetDisplayInfo (in /usr/lib/x86_64-linux-gnu/libXcursor.so.1.0.2)
+==6426==    by 0xC1E7F28: XcursorSupportsARGB (in /usr/lib/x86_64-linux-gnu/libXcursor.so.1.0.2)
+==6426==    by 0xC1EA86F: XcursorNoticeCreateBitmap (in /usr/lib/x86_64-linux-gnu/libXcursor.so.1.0.2)
+==6426== 
+==6426== 64 bytes in 1 blocks are still reachable in loss record 68 of 114
+==6426==    at 0x4C2FB0F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==6426==    by 0x642ED55: _XlcSetConverter (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x64505B9: _XlcDefaultLoader (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643BBBD: _XOpenLC (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643BDFA: _XrmInitParseInfo (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x64239FF: ??? (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x642725D: XrmGetStringDatabase (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x64035F3: ??? (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x6403897: XGetDefault (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0xC1E7EC2: _XcursorGetDisplayInfo (in /usr/lib/x86_64-linux-gnu/libXcursor.so.1.0.2)
+==6426==    by 0xC1E7F28: XcursorSupportsARGB (in /usr/lib/x86_64-linux-gnu/libXcursor.so.1.0.2)
+==6426==    by 0xC1EA86F: XcursorNoticeCreateBitmap (in /usr/lib/x86_64-linux-gnu/libXcursor.so.1.0.2)
+==6426== 
+==6426== 64 bytes in 1 blocks are still reachable in loss record 69 of 114
+==6426==    at 0x4C2FB0F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==6426==    by 0x642ED55: _XlcSetConverter (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x64505D9: _XlcDefaultLoader (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643BBBD: _XOpenLC (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643BDFA: _XrmInitParseInfo (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x64239FF: ??? (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x642725D: XrmGetStringDatabase (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x64035F3: ??? (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x6403897: XGetDefault (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0xC1E7EC2: _XcursorGetDisplayInfo (in /usr/lib/x86_64-linux-gnu/libXcursor.so.1.0.2)
+==6426==    by 0xC1E7F28: XcursorSupportsARGB (in /usr/lib/x86_64-linux-gnu/libXcursor.so.1.0.2)
+==6426==    by 0xC1EA86F: XcursorNoticeCreateBitmap (in /usr/lib/x86_64-linux-gnu/libXcursor.so.1.0.2)
+==6426== 
+==6426== 64 bytes in 1 blocks are still reachable in loss record 70 of 114
+==6426==    at 0x4C2FB0F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==6426==    by 0x642ED55: _XlcSetConverter (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x64505F9: _XlcDefaultLoader (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643BBBD: _XOpenLC (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643BDFA: _XrmInitParseInfo (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x64239FF: ??? (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x642725D: XrmGetStringDatabase (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x64035F3: ??? (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x6403897: XGetDefault (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0xC1E7EC2: _XcursorGetDisplayInfo (in /usr/lib/x86_64-linux-gnu/libXcursor.so.1.0.2)
+==6426==    by 0xC1E7F28: XcursorSupportsARGB (in /usr/lib/x86_64-linux-gnu/libXcursor.so.1.0.2)
+==6426==    by 0xC1EA86F: XcursorNoticeCreateBitmap (in /usr/lib/x86_64-linux-gnu/libXcursor.so.1.0.2)
+==6426== 
+==6426== 64 bytes in 1 blocks are still reachable in loss record 71 of 114
+==6426==    at 0x4C2FB0F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==6426==    by 0x642ED55: _XlcSetConverter (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x6450619: _XlcDefaultLoader (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643BBBD: _XOpenLC (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643BDFA: _XrmInitParseInfo (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x64239FF: ??? (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x642725D: XrmGetStringDatabase (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x64035F3: ??? (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x6403897: XGetDefault (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0xC1E7EC2: _XcursorGetDisplayInfo (in /usr/lib/x86_64-linux-gnu/libXcursor.so.1.0.2)
+==6426==    by 0xC1E7F28: XcursorSupportsARGB (in /usr/lib/x86_64-linux-gnu/libXcursor.so.1.0.2)
+==6426==    by 0xC1EA86F: XcursorNoticeCreateBitmap (in /usr/lib/x86_64-linux-gnu/libXcursor.so.1.0.2)
+==6426== 
+==6426== 64 bytes in 1 blocks are still reachable in loss record 72 of 114
+==6426==    at 0x4C2FB0F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==6426==    by 0x642ED55: _XlcSetConverter (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x6450639: _XlcDefaultLoader (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643BBBD: _XOpenLC (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643BDFA: _XrmInitParseInfo (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x64239FF: ??? (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x642725D: XrmGetStringDatabase (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x64035F3: ??? (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x6403897: XGetDefault (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0xC1E7EC2: _XcursorGetDisplayInfo (in /usr/lib/x86_64-linux-gnu/libXcursor.so.1.0.2)
+==6426==    by 0xC1E7F28: XcursorSupportsARGB (in /usr/lib/x86_64-linux-gnu/libXcursor.so.1.0.2)
+==6426==    by 0xC1EA86F: XcursorNoticeCreateBitmap (in /usr/lib/x86_64-linux-gnu/libXcursor.so.1.0.2)
+==6426== 
+==6426== 64 bytes in 1 blocks are still reachable in loss record 73 of 114
+==6426==    at 0x4C2FB0F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==6426==    by 0x642ED55: _XlcSetConverter (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x6450659: _XlcDefaultLoader (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643BBBD: _XOpenLC (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643BDFA: _XrmInitParseInfo (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x64239FF: ??? (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x642725D: XrmGetStringDatabase (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x64035F3: ??? (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x6403897: XGetDefault (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0xC1E7EC2: _XcursorGetDisplayInfo (in /usr/lib/x86_64-linux-gnu/libXcursor.so.1.0.2)
+==6426==    by 0xC1E7F28: XcursorSupportsARGB (in /usr/lib/x86_64-linux-gnu/libXcursor.so.1.0.2)
+==6426==    by 0xC1EA86F: XcursorNoticeCreateBitmap (in /usr/lib/x86_64-linux-gnu/libXcursor.so.1.0.2)
+==6426== 
+==6426== 64 bytes in 1 blocks are still reachable in loss record 74 of 114
+==6426==    at 0x4C2FB0F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==6426==    by 0x642ED55: _XlcSetConverter (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643B2D0: _XlcAddUtf8Converters (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x6450661: _XlcDefaultLoader (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643BBBD: _XOpenLC (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643BDFA: _XrmInitParseInfo (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x64239FF: ??? (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x642725D: XrmGetStringDatabase (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x64035F3: ??? (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x6403897: XGetDefault (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0xC1E7EC2: _XcursorGetDisplayInfo (in /usr/lib/x86_64-linux-gnu/libXcursor.so.1.0.2)
+==6426==    by 0xC1E7F28: XcursorSupportsARGB (in /usr/lib/x86_64-linux-gnu/libXcursor.so.1.0.2)
+==6426== 
+==6426== 64 bytes in 1 blocks are still reachable in loss record 75 of 114
+==6426==    at 0x4C2FB0F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==6426==    by 0x642ED55: _XlcSetConverter (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643B2F0: _XlcAddUtf8Converters (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x6450661: _XlcDefaultLoader (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643BBBD: _XOpenLC (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643BDFA: _XrmInitParseInfo (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x64239FF: ??? (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x642725D: XrmGetStringDatabase (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x64035F3: ??? (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x6403897: XGetDefault (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0xC1E7EC2: _XcursorGetDisplayInfo (in /usr/lib/x86_64-linux-gnu/libXcursor.so.1.0.2)
+==6426==    by 0xC1E7F28: XcursorSupportsARGB (in /usr/lib/x86_64-linux-gnu/libXcursor.so.1.0.2)
+==6426== 
+==6426== 64 bytes in 1 blocks are still reachable in loss record 76 of 114
+==6426==    at 0x4C2FB0F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==6426==    by 0x642ED55: _XlcSetConverter (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643B310: _XlcAddUtf8Converters (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x6450661: _XlcDefaultLoader (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643BBBD: _XOpenLC (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643BDFA: _XrmInitParseInfo (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x64239FF: ??? (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x642725D: XrmGetStringDatabase (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x64035F3: ??? (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x6403897: XGetDefault (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0xC1E7EC2: _XcursorGetDisplayInfo (in /usr/lib/x86_64-linux-gnu/libXcursor.so.1.0.2)
+==6426==    by 0xC1E7F28: XcursorSupportsARGB (in /usr/lib/x86_64-linux-gnu/libXcursor.so.1.0.2)
+==6426== 
+==6426== 64 bytes in 1 blocks are still reachable in loss record 77 of 114
+==6426==    at 0x4C2FB0F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==6426==    by 0x642ED55: _XlcSetConverter (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643B330: _XlcAddUtf8Converters (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x6450661: _XlcDefaultLoader (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643BBBD: _XOpenLC (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643BDFA: _XrmInitParseInfo (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x64239FF: ??? (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x642725D: XrmGetStringDatabase (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x64035F3: ??? (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x6403897: XGetDefault (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0xC1E7EC2: _XcursorGetDisplayInfo (in /usr/lib/x86_64-linux-gnu/libXcursor.so.1.0.2)
+==6426==    by 0xC1E7F28: XcursorSupportsARGB (in /usr/lib/x86_64-linux-gnu/libXcursor.so.1.0.2)
+==6426== 
+==6426== 64 bytes in 1 blocks are still reachable in loss record 78 of 114
+==6426==    at 0x4C2FB0F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==6426==    by 0x642ED55: _XlcSetConverter (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643B350: _XlcAddUtf8Converters (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x6450661: _XlcDefaultLoader (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643BBBD: _XOpenLC (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643BDFA: _XrmInitParseInfo (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x64239FF: ??? (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x642725D: XrmGetStringDatabase (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x64035F3: ??? (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x6403897: XGetDefault (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0xC1E7EC2: _XcursorGetDisplayInfo (in /usr/lib/x86_64-linux-gnu/libXcursor.so.1.0.2)
+==6426==    by 0xC1E7F28: XcursorSupportsARGB (in /usr/lib/x86_64-linux-gnu/libXcursor.so.1.0.2)
+==6426== 
+==6426== 64 bytes in 1 blocks are still reachable in loss record 79 of 114
+==6426==    at 0x4C2FB0F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==6426==    by 0x642ED55: _XlcSetConverter (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643B370: _XlcAddUtf8Converters (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x6450661: _XlcDefaultLoader (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643BBBD: _XOpenLC (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643BDFA: _XrmInitParseInfo (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x64239FF: ??? (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x642725D: XrmGetStringDatabase (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x64035F3: ??? (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x6403897: XGetDefault (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0xC1E7EC2: _XcursorGetDisplayInfo (in /usr/lib/x86_64-linux-gnu/libXcursor.so.1.0.2)
+==6426==    by 0xC1E7F28: XcursorSupportsARGB (in /usr/lib/x86_64-linux-gnu/libXcursor.so.1.0.2)
+==6426== 
+==6426== 64 bytes in 1 blocks are still reachable in loss record 80 of 114
+==6426==    at 0x4C2FB0F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==6426==    by 0x642ED55: _XlcSetConverter (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x6450661: _XlcDefaultLoader (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643BBBD: _XOpenLC (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643BDFA: _XrmInitParseInfo (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x64239FF: ??? (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x642725D: XrmGetStringDatabase (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x64035F3: ??? (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x6403897: XGetDefault (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0xC1E7EC2: _XcursorGetDisplayInfo (in /usr/lib/x86_64-linux-gnu/libXcursor.so.1.0.2)
+==6426==    by 0xC1E7F28: XcursorSupportsARGB (in /usr/lib/x86_64-linux-gnu/libXcursor.so.1.0.2)
+==6426==    by 0xC1EA86F: XcursorNoticeCreateBitmap (in /usr/lib/x86_64-linux-gnu/libXcursor.so.1.0.2)
+==6426== 
+==6426== 64 bytes in 1 blocks are still reachable in loss record 81 of 114
+==6426==    at 0x4C2FB0F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==6426==    by 0x6425DB6: ??? (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x6426620: ??? (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x642728A: XrmGetStringDatabase (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x64035F3: ??? (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x6403897: XGetDefault (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0xC1E7EC2: _XcursorGetDisplayInfo (in /usr/lib/x86_64-linux-gnu/libXcursor.so.1.0.2)
+==6426==    by 0xC1E7F28: XcursorSupportsARGB (in /usr/lib/x86_64-linux-gnu/libXcursor.so.1.0.2)
+==6426==    by 0xC1EA86F: XcursorNoticeCreateBitmap (in /usr/lib/x86_64-linux-gnu/libXcursor.so.1.0.2)
+==6426==    by 0x63FDCE0: XCreatePixmap (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x4E793BF: ??? (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426==    by 0x4E7C373: ??? (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426== 
+==6426== 69 bytes in 5 blocks are still reachable in loss record 82 of 114
+==6426==    at 0x4C2FB0F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==6426==    by 0x642E92B: _XlcCreateDefaultCharSet (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x6432AC4: ??? (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x6433F4E: ??? (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x6434787: _XlcCreateLC (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x64544EF: _XlcUtf8Loader (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643BBBD: _XOpenLC (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643BD0A: _XlcCurrentLC (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643BD4D: XSetLocaleModifiers (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x4E7B724: ??? (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426==    by 0x4E7C341: ??? (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426==    by 0x4E6C9F7: SDL_VideoInit (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426== 
+==6426== 80 bytes in 5 blocks are still reachable in loss record 83 of 114
+==6426==    at 0x4C2FB0F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==6426==    by 0x642E6B1: _XlcAddCharSet (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x6432AE8: ??? (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x6433F4E: ??? (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x6434787: _XlcCreateLC (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x64544EF: _XlcUtf8Loader (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643BBBD: _XOpenLC (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643BD0A: _XlcCurrentLC (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643BD4D: XSetLocaleModifiers (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x4E7B724: ??? (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426==    by 0x4E7C341: ??? (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426==    by 0x4E6C9F7: SDL_VideoInit (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426== 
+==6426== 80 bytes in 3 blocks are indirectly lost in loss record 84 of 114
+==6426==    at 0x4C31D2F: realloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==6426==    by 0x6432A1A: ??? (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x6433F4E: ??? (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x6434787: _XlcCreateLC (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x64544EF: _XlcUtf8Loader (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643BBBD: _XOpenLC (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643BD0A: _XlcCurrentLC (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643BD4D: XSetLocaleModifiers (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x4E7B724: ??? (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426==    by 0x4E7C341: ??? (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426==    by 0x4E6C9F7: SDL_VideoInit (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426==    by 0x4E45DCB: SDL_InitSubSystem (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426== 
+==6426== 83 bytes in 2 blocks are still reachable in loss record 85 of 114
+==6426==    at 0x4C2FB0F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==6426==    by 0x401D329: strdup (strdup.c:42)
+==6426==    by 0x4018656: _dl_load_cache_lookup (dl-cache.c:315)
+==6426==    by 0x4009382: _dl_map_object (dl-load.c:2255)
+==6426==    by 0x400E311: openaux (dl-deps.c:63)
+==6426==    by 0x54592DE: _dl_catch_exception (dl-error-skeleton.c:196)
+==6426==    by 0x400E617: _dl_map_object_deps (dl-deps.c:249)
+==6426==    by 0x4014F48: dl_open_worker (dl-open.c:278)
+==6426==    by 0x54592DE: _dl_catch_exception (dl-error-skeleton.c:196)
+==6426==    by 0x40147C9: _dl_open (dl-open.c:605)
+==6426==    by 0x5D88F95: dlopen_doit (dlopen.c:66)
+==6426==    by 0x54592DE: _dl_catch_exception (dl-error-skeleton.c:196)
+==6426== 
+==6426== 83 bytes in 2 blocks are still reachable in loss record 86 of 114
+==6426==    at 0x4C2FB0F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==6426==    by 0x400C3E7: _dl_new_object (dl-object.c:163)
+==6426==    by 0x40069A4: _dl_map_object_from_fd (dl-load.c:943)
+==6426==    by 0x4008FFB: _dl_map_object (dl-load.c:2389)
+==6426==    by 0x400E311: openaux (dl-deps.c:63)
+==6426==    by 0x54592DE: _dl_catch_exception (dl-error-skeleton.c:196)
+==6426==    by 0x400E617: _dl_map_object_deps (dl-deps.c:249)
+==6426==    by 0x4014F48: dl_open_worker (dl-open.c:278)
+==6426==    by 0x54592DE: _dl_catch_exception (dl-error-skeleton.c:196)
+==6426==    by 0x40147C9: _dl_open (dl-open.c:605)
+==6426==    by 0x5D88F95: dlopen_doit (dlopen.c:66)
+==6426==    by 0x54592DE: _dl_catch_exception (dl-error-skeleton.c:196)
+==6426== 
+==6426== 89 bytes in 5 blocks are still reachable in loss record 87 of 114
+==6426==    at 0x4C2FB0F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==6426==    by 0x642E8C4: _XlcCreateDefaultCharSet (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x6432AC4: ??? (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x6433F4E: ??? (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x6434787: _XlcCreateLC (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x64544EF: _XlcUtf8Loader (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643BBBD: _XOpenLC (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643BD0A: _XlcCurrentLC (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643BD4D: XSetLocaleModifiers (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x4E7B724: ??? (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426==    by 0x4E7C341: ??? (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426==    by 0x4E6C9F7: SDL_VideoInit (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426== 
+==6426== 112 bytes in 14 blocks are indirectly lost in loss record 88 of 114
+==6426==    at 0x4C2FB0F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==6426==    by 0x6432B09: ??? (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x6433F4E: ??? (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x6434787: _XlcCreateLC (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x64544EF: _XlcUtf8Loader (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643BBBD: _XOpenLC (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643BD0A: _XlcCurrentLC (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643BD4D: XSetLocaleModifiers (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x4E7B724: ??? (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426==    by 0x4E7C341: ??? (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426==    by 0x4E6C9F7: SDL_VideoInit (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426==    by 0x4E45DCB: SDL_InitSubSystem (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426== 
+==6426== 142 bytes in 18 blocks are still reachable in loss record 89 of 114
+==6426==    at 0x4C2FB0F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==6426==    by 0x642F30F: ??? (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x6430224: ??? (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x6430447: ??? (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x6430769: _XlcCreateLocaleDataBase (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x64349C7: ??? (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x6433F42: ??? (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x6434787: _XlcCreateLC (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x64504DF: _XlcDefaultLoader (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643BBBD: _XOpenLC (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643BDFA: _XrmInitParseInfo (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x64239FF: ??? (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426== 
+==6426== 160 bytes in 2 blocks are still reachable in loss record 90 of 114
+==6426==    at 0x4C31B25: calloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==6426==    by 0x64320CE: ??? (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x64325E1: ??? (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x6433F4E: ??? (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x6434787: _XlcCreateLC (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x64504DF: _XlcDefaultLoader (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643BBBD: _XOpenLC (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643BDFA: _XrmInitParseInfo (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x64239FF: ??? (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x642725D: XrmGetStringDatabase (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x64035F3: ??? (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x6403897: XGetDefault (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426== 
+==6426== 160 bytes in 2 blocks are indirectly lost in loss record 91 of 114
+==6426==    at 0x4C31B25: calloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==6426==    by 0x64320CE: ??? (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x64325E1: ??? (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x6433F4E: ??? (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x6434787: _XlcCreateLC (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x64504DF: _XlcDefaultLoader (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643BBBD: _XOpenLC (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643BD0A: _XlcCurrentLC (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643BD4D: XSetLocaleModifiers (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x4E7B19E: ??? (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426==    by 0x4E7C341: ??? (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426==    by 0x4E6C9F7: SDL_VideoInit (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426== 
+==6426== 168 bytes in 1 blocks are still reachable in loss record 92 of 114
+==6426==    at 0x4C2FB0F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==6426==    by 0x6431CF9: ??? (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x6434765: _XlcCreateLC (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x64504DF: _XlcDefaultLoader (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643BBBD: _XOpenLC (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643BDFA: _XrmInitParseInfo (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x64239FF: ??? (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x642725D: XrmGetStringDatabase (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x64035F3: ??? (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x6403897: XGetDefault (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0xC1E7EC2: _XcursorGetDisplayInfo (in /usr/lib/x86_64-linux-gnu/libXcursor.so.1.0.2)
+==6426==    by 0xC1E7F28: XcursorSupportsARGB (in /usr/lib/x86_64-linux-gnu/libXcursor.so.1.0.2)
+==6426== 
+==6426== 176 bytes in 1 blocks are still reachable in loss record 93 of 114
+==6426==    at 0x4C31B25: calloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==6426==    by 0x6431CE2: ??? (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x6434765: _XlcCreateLC (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x64504DF: _XlcDefaultLoader (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643BBBD: _XOpenLC (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643BDFA: _XrmInitParseInfo (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x64239FF: ??? (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x642725D: XrmGetStringDatabase (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x64035F3: ??? (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x6403897: XGetDefault (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0xC1E7EC2: _XcursorGetDisplayInfo (in /usr/lib/x86_64-linux-gnu/libXcursor.so.1.0.2)
+==6426==    by 0xC1E7F28: XcursorSupportsARGB (in /usr/lib/x86_64-linux-gnu/libXcursor.so.1.0.2)
+==6426== 
+==6426== 192 (16 direct, 176 indirect) bytes in 1 blocks are definitely lost in loss record 94 of 114
+==6426==    at 0x4C31D2F: realloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==6426==    by 0x64320FC: ??? (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x64325E1: ??? (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x6433F4E: ??? (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x6434787: _XlcCreateLC (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x64504DF: _XlcDefaultLoader (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643BBBD: _XOpenLC (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643BD0A: _XlcCurrentLC (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643BD4D: XSetLocaleModifiers (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x4E7B19E: ??? (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426==    by 0x4E7C341: ??? (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426==    by 0x4E6C9F7: SDL_VideoInit (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426== 
+==6426== 216 bytes in 18 blocks are still reachable in loss record 95 of 114
+==6426==    at 0x4C2FB0F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==6426==    by 0x538F9B9: strdup (strdup.c:42)
+==6426==    by 0x6430127: ??? (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x6430447: ??? (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x6430769: _XlcCreateLocaleDataBase (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x64349C7: ??? (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x6433F42: ??? (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x6434787: _XlcCreateLC (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x64504DF: _XlcDefaultLoader (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643BBBD: _XOpenLC (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643BDFA: _XrmInitParseInfo (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x64239FF: ??? (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426== 
+==6426== 274 bytes in 18 blocks are still reachable in loss record 96 of 114
+==6426==    at 0x4C2FB0F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==6426==    by 0x538F9B9: strdup (strdup.c:42)
+==6426==    by 0x64302BF: ??? (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x6430447: ??? (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x6430769: _XlcCreateLocaleDataBase (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x64349C7: ??? (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x6433F42: ??? (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x6434787: _XlcCreateLC (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x64504DF: _XlcDefaultLoader (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643BBBD: _XOpenLC (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643BDFA: _XrmInitParseInfo (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x64239FF: ??? (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426== 
+==6426== 288 bytes in 18 blocks are still reachable in loss record 97 of 114
+==6426==    at 0x4C2FB0F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==6426==    by 0x642F2EE: ??? (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x6430224: ??? (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x6430447: ??? (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x6430769: _XlcCreateLocaleDataBase (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x64349C7: ??? (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x6433F42: ??? (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x6434787: _XlcCreateLC (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x64504DF: _XlcDefaultLoader (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643BBBD: _XOpenLC (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643BDFA: _XrmInitParseInfo (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x64239FF: ??? (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426== 
+==6426== 360 bytes in 5 blocks are still reachable in loss record 98 of 114
+==6426==    at 0x4C31B25: calloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==6426==    by 0x642E882: _XlcCreateDefaultCharSet (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x6432AC4: ??? (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x6433F4E: ??? (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x6434787: _XlcCreateLC (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x64544EF: _XlcUtf8Loader (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643BBBD: _XOpenLC (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643BD0A: _XlcCurrentLC (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643BD4D: XSetLocaleModifiers (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x4E7B724: ??? (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426==    by 0x4E7C341: ??? (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426==    by 0x4E6C9F7: SDL_VideoInit (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426== 
+==6426== 384 bytes in 3 blocks are still reachable in loss record 99 of 114
+==6426==    at 0x4C31B25: calloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==6426==    by 0x4011E85: _dl_check_map_versions (dl-version.c:274)
+==6426==    by 0x401524B: dl_open_worker (dl-open.c:284)
+==6426==    by 0x54592DE: _dl_catch_exception (dl-error-skeleton.c:196)
+==6426==    by 0x40147C9: _dl_open (dl-open.c:605)
+==6426==    by 0x5D88F95: dlopen_doit (dlopen.c:66)
+==6426==    by 0x54592DE: _dl_catch_exception (dl-error-skeleton.c:196)
+==6426==    by 0x545936E: _dl_catch_error (dl-error-skeleton.c:215)
+==6426==    by 0x5D89734: _dlerror_run (dlerror.c:162)
+==6426==    by 0x5D89050: dlopen@@GLIBC_2.2.5 (dlopen.c:87)
+==6426==    by 0x63FD581: ??? (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x63FD6AE: _XNoticeCreateBitmap (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426== 
+==6426== 456 bytes in 1 blocks are still reachable in loss record 100 of 114
+==6426==    at 0x4C31B25: calloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==6426==    by 0x643082F: _XlcCreateLocaleDataBase (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x64349C7: ??? (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x6433F42: ??? (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x6434787: _XlcCreateLC (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x64504DF: _XlcDefaultLoader (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643BBBD: _XOpenLC (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643BDFA: _XrmInitParseInfo (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x64239FF: ??? (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x642725D: XrmGetStringDatabase (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x64035F3: ??? (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x6403897: XGetDefault (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426== 
+==6426== 633 bytes in 49 blocks are still reachable in loss record 101 of 114
+==6426==    at 0x4C2FB0F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==6426==    by 0x642E92B: _XlcCreateDefaultCharSet (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x642E48A: _XlcAddCT (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x642E54B: _XlcInitCTInfo (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x6434872: ??? (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x6433F42: ??? (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x6434787: _XlcCreateLC (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x64544EF: _XlcUtf8Loader (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643BBBD: _XOpenLC (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643BD0A: _XlcCurrentLC (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643BD4D: XSetLocaleModifiers (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x4E7B19E: ??? (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426== 
+==6426== 720 bytes in 18 blocks are still reachable in loss record 102 of 114
+==6426==    at 0x4C31B25: calloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==6426==    by 0x643010F: ??? (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x6430447: ??? (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x6430769: _XlcCreateLocaleDataBase (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x64349C7: ??? (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x6433F42: ??? (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x6434787: _XlcCreateLC (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x64504DF: _XlcDefaultLoader (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643BBBD: _XOpenLC (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643BDFA: _XrmInitParseInfo (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x64239FF: ??? (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x642725D: XrmGetStringDatabase (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426== 
+==6426== 800 bytes in 50 blocks are still reachable in loss record 103 of 114
+==6426==    at 0x4C2FB0F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==6426==    by 0x642E6B1: _XlcAddCharSet (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x642E49E: _XlcAddCT (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x642E54B: _XlcInitCTInfo (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x6434872: ??? (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x6433F42: ??? (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x6434787: _XlcCreateLC (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x64544EF: _XlcUtf8Loader (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643BBBD: _XOpenLC (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643BD0A: _XlcCurrentLC (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643BD4D: XSetLocaleModifiers (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x4E7B19E: ??? (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426== 
+==6426== 1,028 bytes in 50 blocks are still reachable in loss record 104 of 114
+==6426==    at 0x4C2FB0F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==6426==    by 0x642E8C4: _XlcCreateDefaultCharSet (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x642E48A: _XlcAddCT (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x642E54B: _XlcInitCTInfo (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x6434872: ??? (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x6433F42: ??? (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x6434787: _XlcCreateLC (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x64544EF: _XlcUtf8Loader (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643BBBD: _XOpenLC (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643BD0A: _XlcCurrentLC (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643BD4D: XSetLocaleModifiers (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x4E7B19E: ??? (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426== 
+==6426== 1,184 bytes in 1 blocks are still reachable in loss record 105 of 114
+==6426==    at 0x4C31B25: calloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==6426==    by 0x400C100: _dl_new_object (dl-object.c:73)
+==6426==    by 0x40069A4: _dl_map_object_from_fd (dl-load.c:943)
+==6426==    by 0x4008FFB: _dl_map_object (dl-load.c:2389)
+==6426==    by 0x4014EE3: dl_open_worker (dl-open.c:235)
+==6426==    by 0x54592DE: _dl_catch_exception (dl-error-skeleton.c:196)
+==6426==    by 0x40147C9: _dl_open (dl-open.c:605)
+==6426==    by 0x5D88F95: dlopen_doit (dlopen.c:66)
+==6426==    by 0x54592DE: _dl_catch_exception (dl-error-skeleton.c:196)
+==6426==    by 0x545936E: _dl_catch_error (dl-error-skeleton.c:215)
+==6426==    by 0x5D89734: _dlerror_run (dlerror.c:162)
+==6426==    by 0x5D89050: dlopen@@GLIBC_2.2.5 (dlopen.c:87)
+==6426== 
+==6426== 1,360 bytes in 17 blocks are indirectly lost in loss record 106 of 114
+==6426==    at 0x4C31B25: calloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==6426==    by 0x64320CE: ??? (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x64325E1: ??? (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x6433F4E: ??? (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x6434787: _XlcCreateLC (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x64544EF: _XlcUtf8Loader (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643BBBD: _XOpenLC (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643BD0A: _XlcCurrentLC (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643BD4D: XSetLocaleModifiers (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x4E7B724: ??? (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426==    by 0x4E7C341: ??? (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426==    by 0x4E6C9F7: SDL_VideoInit (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426== 
+==6426== 1,688 (136 direct, 1,552 indirect) bytes in 1 blocks are definitely lost in loss record 107 of 114
+==6426==    at 0x4C31D2F: realloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==6426==    by 0x64320FC: ??? (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x64325E1: ??? (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x6433F4E: ??? (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x6434787: _XlcCreateLC (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x64544EF: _XlcUtf8Loader (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643BBBD: _XOpenLC (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643BD0A: _XlcCurrentLC (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643BD4D: XSetLocaleModifiers (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x4E7B724: ??? (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426==    by 0x4E7C341: ??? (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426==    by 0x4E6C9F7: SDL_VideoInit (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426== 
+==6426== 2,048 bytes in 1 blocks are still reachable in loss record 108 of 114
+==6426==    at 0x4C2FB0F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==6426==    by 0x64309BE: _XlcCreateLocaleDataBase (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x64349C7: ??? (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x6433F42: ??? (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x6434787: _XlcCreateLC (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x64544EF: _XlcUtf8Loader (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643BBBD: _XOpenLC (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643BD0A: _XlcCurrentLC (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643BD4D: XSetLocaleModifiers (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x4E7B19E: ??? (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426==    by 0x4E7C341: ??? (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426==    by 0x4E6C9F7: SDL_VideoInit (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426== 
+==6426== 2,367 bytes in 2 blocks are still reachable in loss record 109 of 114
+==6426==    at 0x4C31B25: calloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==6426==    by 0x400C100: _dl_new_object (dl-object.c:73)
+==6426==    by 0x40069A4: _dl_map_object_from_fd (dl-load.c:943)
+==6426==    by 0x4008FFB: _dl_map_object (dl-load.c:2389)
+==6426==    by 0x400E311: openaux (dl-deps.c:63)
+==6426==    by 0x54592DE: _dl_catch_exception (dl-error-skeleton.c:196)
+==6426==    by 0x400E617: _dl_map_object_deps (dl-deps.c:249)
+==6426==    by 0x4014F48: dl_open_worker (dl-open.c:278)
+==6426==    by 0x54592DE: _dl_catch_exception (dl-error-skeleton.c:196)
+==6426==    by 0x40147C9: _dl_open (dl-open.c:605)
+==6426==    by 0x5D88F95: dlopen_doit (dlopen.c:66)
+==6426==    by 0x54592DE: _dl_catch_exception (dl-error-skeleton.c:196)
+==6426== 
+==6426== 2,631 bytes in 50 blocks are still reachable in loss record 110 of 114
+==6426==    at 0x4C2FB0F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==6426==    by 0x642E25B: _XlcAddCT (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x642E54B: _XlcInitCTInfo (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x6434872: ??? (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x6433F42: ??? (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x6434787: _XlcCreateLC (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x64544EF: _XlcUtf8Loader (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643BBBD: _XOpenLC (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643BD0A: _XlcCurrentLC (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643BD4D: XSetLocaleModifiers (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x4E7B19E: ??? (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426==    by 0x4E7C341: ??? (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426== 
+==6426== 3,600 bytes in 50 blocks are still reachable in loss record 111 of 114
+==6426==    at 0x4C31B25: calloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==6426==    by 0x642E882: _XlcCreateDefaultCharSet (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x642E48A: _XlcAddCT (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x642E54B: _XlcInitCTInfo (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x6434872: ??? (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x6433F42: ??? (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x6434787: _XlcCreateLC (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x64544EF: _XlcUtf8Loader (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643BBBD: _XOpenLC (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643BD0A: _XlcCurrentLC (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643BD4D: XSetLocaleModifiers (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x4E7B19E: ??? (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426== 
+==6426== 8,176 bytes in 1 blocks are still reachable in loss record 112 of 114
+==6426==    at 0x4C2FB0F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==6426==    by 0x64149D5: ??? (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x6414D69: _XrmInternalStringToQuark (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x642E608: _XlcGetCharSet (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x642E228: _XlcAddCT (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x642E54B: _XlcInitCTInfo (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x6434872: ??? (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x6433F42: ??? (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x6434787: _XlcCreateLC (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x64544EF: _XlcUtf8Loader (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643BBBD: _XOpenLC (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643BD0A: _XlcCurrentLC (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426== 
+==6426== 8,176 bytes in 1 blocks are still reachable in loss record 113 of 114
+==6426==    at 0x4C2FB0F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==6426==    by 0x64149D5: ??? (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x6414F18: _XrmInternalStringToQuark (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x64304BA: _XlcGetLocaleDataBase (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x6432F1E: ??? (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x6433F4E: ??? (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x6434787: _XlcCreateLC (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x64544EF: _XlcUtf8Loader (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643BBBD: _XOpenLC (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643BD0A: _XlcCurrentLC (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x643BD4D: XSetLocaleModifiers (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x4E7B724: ??? (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426== 
+==6426== 8,192 bytes in 1 blocks are still reachable in loss record 114 of 114
+==6426==    at 0x4C31B25: calloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==6426==    by 0x6414C53: _XrmInternalStringToQuark (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x6403801: XGetDefault (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0xC1E7E28: _XcursorGetDisplayInfo (in /usr/lib/x86_64-linux-gnu/libXcursor.so.1.0.2)
+==6426==    by 0xC1E7F28: XcursorSupportsARGB (in /usr/lib/x86_64-linux-gnu/libXcursor.so.1.0.2)
+==6426==    by 0xC1EA86F: XcursorNoticeCreateBitmap (in /usr/lib/x86_64-linux-gnu/libXcursor.so.1.0.2)
+==6426==    by 0x63FDCE0: XCreatePixmap (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==6426==    by 0x4E793BF: ??? (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426==    by 0x4E7C373: ??? (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426==    by 0x4E6C9F7: SDL_VideoInit (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426==    by 0x4E45DCB: SDL_InitSubSystem (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426==    by 0x4E45E32: SDL_Init (in /usr/lib/x86_64-linux-gnu/libSDL-1.2.so.0.11.4)
+==6426== 
+==6426== LEAK SUMMARY:
+==6426==    definitely lost: 171 bytes in 5 blocks
+==6426==    indirectly lost: 1,728 bytes in 38 blocks
+==6426==      possibly lost: 0 bytes in 0 blocks
+==6426==    still reachable: 47,045 bytes in 461 blocks
+==6426==         suppressed: 0 bytes in 0 blocks
+==6426== 
+==6426== ERROR SUMMARY: 4 errors from 4 contexts (suppressed: 0 from 0)
+==6426== ERROR SUMMARY: 4 errors from 4 contexts (suppressed: 0 from 0)
